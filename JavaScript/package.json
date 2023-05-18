@@ -1,0 +1,10 @@
+{
+    "name": "open-data-structures",
+    "version": "1.0.0",
+    "description": "Implementations of the book open data structures",
+    "main": "",
+    "scripts": {},
+    "type": "module",
+    "author": "Axel Ariel Saravia",
+    "license": "ISC"
+}

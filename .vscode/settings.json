@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "vector": "c",
+        "string_view": "c",
+        "stdlib.h": "c",
+        "assert.h": "c"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "xor-linked.h": "c",
+        "string_view": "c",
+        "assert.h": "c",
+        "queue-circular.h": "c",
+        "stdlib.h": "c",
+        "double-linked.c": "cpp",
+        "vector": "c"
+    }
+}
