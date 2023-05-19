@@ -24,8 +24,12 @@ int main() {
 
 
 void circularQueueTest() {
-    circularQueue q1 = circular_queue_init(4);
-    circularQueue q2 = circular_queue_init(6);
+    # define ARR1_SIZE 4
+    # define ARR2_SIZE 6
+    T arr1[ARR1_SIZE];
+    T arr2[ARR2_SIZE];
+    circularQueue q1 = circular_queue_init(ARR1_SIZE, arr1);
+    circularQueue q2 = circular_queue_init(ARR2_SIZE, arr2);
     circular_queue_add(&q1, 10);
     assert(q1.content[0] == 10);
 

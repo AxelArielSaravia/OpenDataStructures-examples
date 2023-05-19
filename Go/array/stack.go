@@ -76,7 +76,7 @@ func (stack *ArrayStack[T]) clear() *ArrayStack[T] {
 	return stack
 }
 
-func arrayStack_int_create() ArrayStack[int] {
+func CreateInt() ArrayStack[int] {
 	return ArrayStack[int]{
 		content:  make([]int, 2),
 		length:   0,

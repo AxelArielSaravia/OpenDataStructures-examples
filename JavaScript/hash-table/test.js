@@ -2,7 +2,7 @@
  * Author: Axel Ariel Saravia
  */
 
-import assert from 'node:assert/strict';
+import assert from "node:assert/strict";
 import ChainedHashTable from "./chained.js";
 import LinearHashTable from "./linear.js";
 

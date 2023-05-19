@@ -11,6 +11,17 @@ BinaryNode<T> :: {
 }
 */
 
+/**
+createNode :: (T, maybe<BinaryNode<T>>) -> BinaryNode<T> */
+function createBinaryNode(value, parent) {
+    return {
+        left: undefined,
+        parent,
+        right: undefined, 
+        value
+    };
+}
+
 const BinaryTree = {
     /**
     create :: (maybe<BinaryNode<T>>) -> {root: maybe<BinaryNode<T>>, size: number [uint]}*/
@@ -18,16 +29,6 @@ const BinaryTree = {
         return {
             root,
             size: 0
-        };
-    },
-    /**
-    createNode :: (maybe<BinaryNode<T>>, T) -> BinaryNode<T> */
-    createNode(parent, value) {
-        return {
-            left: undefined,
-            parent,
-            right: undefined, 
-            value
         };
     },
     /**
@@ -48,8 +49,8 @@ const BinaryTree = {
             ? 0
             : (
                 1
-                + BinaryTree.recursive_size(u.left)
-                + BinaryTree.recursive_size(u.right)
+                + BinaryTree.recursive_size(root.left)
+                + BinaryTree.recursive_size(root.right)
             )
         );
     },
@@ -60,8 +61,8 @@ const BinaryTree = {
             root === undefined
             ? 0
             : 1 + Math.max(
-                BinaryTree.recursive_height(u.left),
-                BinaryTree.recursive_height(u.right)
+                BinaryTree.recursive_height(root.left),
+                BinaryTree.recursive_height(root.right)
             )
         );
     },
@@ -72,6 +73,7 @@ const BinaryTree = {
         let n = 0;
         let u = root;
         let prv;
+        let nxt;
         while (u !== undefined) {
             if (prv === u.parent) {
     // Visit a node for the first time
@@ -101,28 +103,31 @@ const BinaryTree = {
     /**
     height :: (maybe<BinaryNode<T>>) -> number [uint] */
     height(root) {
+    // Based in the traverse function
         let n = 0;  // keeps the depthes value
         let m = n;  // keep track of the depths of each node
         let u = root;
         let prv;
+        let nxt;
         while (u !== undefined) {
             if (prv === u.parent) {
     // Visit a node for the first time
                 m += 1;
-                if (u.left !== undefined) {
-                    nxt = u.left;
-                } else if (u.right !== undefined) {
-                    nxt = u.right;
-                } else {
-                    nxt = u.parent
-                }
+                nxt = (
+                    u.left !== undefined
+                    ? u.left
+                    : ( u.right !== undefined
+                        ? u.right
+                        : u.parent
+                    )
+                );
             } else if (prv === u.left) {
                 m -= 1;
-                if (u.right !== undefined) {
-                    nxt = u.right;
-                } else {
-                    nxt = u.parent
-                }
+                nxt = (
+                    u.right !== undefined
+                    ? u.right
+                    : u.parent
+                );
             } else {
                 m -= 1;
                 nxt = u.parent;
@@ -142,17 +147,17 @@ const BinaryTree = {
 
 /**
 recursive_travese :: (maybe<BinaryNode<T>>) -> undefined */
-function recursive_travese(root) {
+function recursive_traverse(root) {
     if (root === undefined) {
         return;
     }
-    recursive_travese(root.left);
-    recursive_travese(root.right);
+    recursive_traverse(root.left);
+    recursive_traverse(root.right);
 }
 
 /**
-travese :: (BinaryNode<T>) -> undefined */
-function travese(root) {
+traverse :: (BinaryNode<T>) -> undefined */
+function traverse(root) {
 //This traverse sometimes is called first-depth traverse
     let u = root;
     let prv;
@@ -187,7 +192,7 @@ function travese(root) {
 // from the current node to the root
 /**
 travese2 :: (BinaryNode<T>) -> undefined */
-function travese2(root) {
+function traverse2(root) {
     const stack = [root];
     let u;
     let left;
@@ -235,3 +240,7 @@ function breadthFirstTraversal(root) {
     }
 }
 
+export {
+    BinaryTree,
+    createBinaryNode
+};
