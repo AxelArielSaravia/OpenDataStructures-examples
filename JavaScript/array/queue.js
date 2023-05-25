@@ -3,9 +3,9 @@
  */
 
 /**
-Queue<T> :: {
+Queue T :: {
     capacity: number [uint > 0]
-    content: Array<T>,
+    content: Array T,
     head: number [uint],
     length: number [uint]
 }
@@ -13,7 +13,7 @@ Queue<T> :: {
 
 const ArrayQueue = Object.freeze({
     /**
-    create :: () -> Queue<T> */
+    create T :: () -> Queue T */
     create() {
         return Object.seal({
             capacity: 1,
@@ -23,7 +23,7 @@ const ArrayQueue = Object.freeze({
         });
     },
     /**
-    resize :: (Queue<T>) -> Queue<T> */
+    resize T :: (Queue T) -> Queue T */
     resize(queue) {
         const length = queue.length;
         const newCapacity = Math.max(1, 2 * length);
@@ -80,17 +80,17 @@ const ArrayQueue = Object.freeze({
         return queue;
     },
     /**
-    size :: (Queue<T>) -> number [uint] */
+    size T :: (Queue T) -> number [uint] */
     size(queue) {
         return queue.length;
     },
     /**
-    get :: (Queue<T>) -> T */
+    get T :: (Queue T) -> T */
     get(queue) {
         return queue.content[queue.head];
     },
     /**
-    add :: (Queue<T>, T) -> Queue<T> */
+    add T :: (Queue T, T) -> Queue<T */
     add(queue, x) {
         if (queue.length + 1 > queue.capacity) {
             ArrayQueue.resize(queue);
@@ -101,7 +101,7 @@ const ArrayQueue = Object.freeze({
         return queue;
     },
     /**
-    remove :: (Queue<T>) -> T */
+    remove T :: (Queue T) -> T */
     remove(queue) {
         const x = queue.content[queue.head];
         queue.head = (queue.head + 1) % queue.capacity;
@@ -112,7 +112,7 @@ const ArrayQueue = Object.freeze({
         return x;
     },
     /**
-    clear :: (Queue<T>) -> undefined */
+    clear T :: (Queue T) -> undefined */
     clear(queue) {
         queue.content = Array(1);
         queue.capacity = 1;

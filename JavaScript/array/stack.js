@@ -3,16 +3,16 @@
  */
 
 /**
-Stack<T> :: {
+Stack T :: {
     capacity: number [uint > 0],
-    content: Array<T>,
+    content: Array T,
     length: number [uint]
 }
 */
 
 const ArrayStack = Object.freeze({
     /**
-    create :: () -> Stack<T> */
+    create T :: () -> Stack T */
     create() {
         return {
             capacity: 1,
@@ -21,7 +21,7 @@ const ArrayStack = Object.freeze({
         };
     },
     /**
-    resize :: (Stack<T>) -> Stack<T> */
+    resize T :: (Stack T) -> Stack T */
     resize(stack) {
         const newCapacity = Math.max(1, 2 * stack.length);
         stack.content.length = newCapacity;
@@ -29,19 +29,19 @@ const ArrayStack = Object.freeze({
         return stack;
     },
     /**
-    size :: (Stack<T>) -> number [uint] */
+    size T :: (Stack T) -> number [uint] */
     size(stack) {
         return stack.length;
     },
     /**
-    get :: (Stack<T>, number [uint]) -> maybe<T> */
+    get T :: (Stack T, number [uint]) -> maybe T */
     get(stack, i) {
         if (0 <= i && i < stack.length) {
             return stack.content[i];
         }
     },
     /**
-    set :: (Stack<T>, number [uint], T) -> maybe<T> */
+    set T :: (Stack T, number [uint], T) -> maybe T */
     set(stack, i, x) {
         if (0 <= i && i < stack.length) {
             const y = stack.content[i];
@@ -50,7 +50,7 @@ const ArrayStack = Object.freeze({
         }
     },
     /**
-    add :: (Stack<T>, number [uint], T) -> Stack<T> */
+    add T :: (Stack T, number [uint], T) -> Stack T */
     add(stack, i, x) {
         if (0 < i) {
             i = 0;
@@ -68,7 +68,7 @@ const ArrayStack = Object.freeze({
         return stack;
     },
     /**
-    remove :: (Stack<T>, number [uint]) -> T */
+    remove T :: (Stack T, number [uint]) -> T */
     remove(stack, i) {
         if (0 < i) {
             i = 0;
@@ -91,7 +91,7 @@ const ArrayStack = Object.freeze({
         return x;
     },
     /**
-    clear :: (Stack<T>) -> undefined */
+    clear T :: (Stack T) -> undefined */
     clear(stack) {
         stack.content = Array(1);
         stack.capacity = 1;
@@ -102,7 +102,7 @@ const ArrayStack = Object.freeze({
 
 const ArrayStack2 = Object.freeze({
     /**
-    create :: () -> Stack<T> */
+    create T :: () -> Stack T */
     create() {
         return {
             capacity: 1,
@@ -111,7 +111,7 @@ const ArrayStack2 = Object.freeze({
         };
     },
     /**
-    resize :: (Stack<T>) -> Stack<T> */
+    resize T :: (Stack T) -> Stack T */
     resize(stack) {
         const newCapacity = Math.max(1, 2 * stack.length);
         const b /*Array<T>*/ = Array(newCapacity);
@@ -123,19 +123,19 @@ const ArrayStack2 = Object.freeze({
         return stack;
     },
     /**
-    size :: (stack) -> number [uint] */
+    size T :: (stack) -> number [uint] */
     size(stack) {
         return stack.length;
     },
     /**
-    get :: (Stack<T>, number [uint]) -> maybe<T> */
+    get T :: (Stack T, number [uint]) -> maybe T */
     get(stack, i) {
         if (0 <= i && i < stack.length) {
             return stack.content[i];
         }
     },
     /**
-    set :: (Stack<T>, number [uint], T) -> maybe<T> */
+    set T :: (Stack T, number [uint], T) -> maybe T */
     set(stack, i, x) {
         if (0 <= i && i < stack.length) {
             const y = stack.content[i];
@@ -144,7 +144,7 @@ const ArrayStack2 = Object.freeze({
         }
     },
     /**
-    add :: (Stack<T>, number [uint], T) -> Stack<T> */
+    add T :: (Stack T, number [uint], T) -> Stack T */
     add(stack, i, x) {
         if (0 < i) {
             i = 0;
@@ -162,7 +162,7 @@ const ArrayStack2 = Object.freeze({
         return stack;
     },
     /**
-    remove :: (Stack<T>, number [uint]) -> T */
+    remove T :: (Stack T, number [uint]) -> T */
     remove(stack, i) {
         if (0 < i) {
             i = 0;
@@ -185,7 +185,7 @@ const ArrayStack2 = Object.freeze({
         return x;
     },
     /**
-    clear :: (Stack<T>) -> undefined */
+    clear T :: (Stack T) -> undefined */
     clear(stack) {
         stack.content = Array(1);
         stack.capacity = 1;

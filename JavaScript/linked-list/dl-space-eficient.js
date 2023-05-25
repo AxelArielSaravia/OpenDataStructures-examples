@@ -4,21 +4,24 @@
 
 import BoundedArrayDeque from "../array/deque-bounded.js";
 /**
-ArrayDoubleNode<T> :: DoubleNode<Array<T>>
-DoubleLinkEList<T> :: {
+ArrayDoubleNode T :: DoubleNode Array T
+*/
+/**
+DoubleLinkEList T :: {
     capacity: number [uint > 0],
-    dummy: BoundedDeque<T>,
+    dummy: BoundedDeque T,
     length: number [uint],
-    [Symbol<"selected">]: [ BoundedDeque<T>, number [iont] ]
+    [SelectedSymbol]: [ BoundedDeque T, number [iont] ]
 }
 */
 
+/**
+SelectedSymbol :: symbol */
 const selected = Symbol("selected");
-
 
 const SEList = Object.freeze({
     /**
-    create :: (number [uint > 0]) -> DoubleLinkEList<T> */
+    create T :: (number [uint > 0]) -> DoubleLinkEList T */
     create(capacity) {
         if (typeof capacity !== "number" || capacity < 4) {
             capacity = 4;
@@ -38,7 +41,7 @@ const SEList = Object.freeze({
         };
     },
     /**
-    selectBlock :: (DoubleLinkEList<T>, number [uint]) -> DoubleLinkEList<T> */
+    selectBlock T :: (DoubleLinkEList T, number [uint]) -> DoubleLinkEList T */
     selectBlock(list, i) {
         let node = list.dummy;
         if (i < list.length / 2) {
@@ -60,7 +63,7 @@ const SEList = Object.freeze({
         return list;
     },
     /**
-    get :: (DoubleLinkEList<T>, number [uint]) -> maybe<T> */
+    get T :: (DoubleLinkEList T, number [uint]) -> maybe T */
     get(list, i) {
         if (i < 0 || list.length <= i) {
             return;
@@ -72,7 +75,7 @@ const SEList = Object.freeze({
         );
     },
     /**
-    set :: (DoubleLinkEList<T>, number [uint], T) -> maybe<T> */
+    set T :: (DoubleLinkEList T, number [uint], T) -> maybe T */
     set(list, i, x) {
         if (i < 0 || list.length <= i) {
             return;
@@ -85,7 +88,7 @@ const SEList = Object.freeze({
         );
     },
     /**
-    addBefore :: (DoubleLinkEList<T>) -> ArrayDoubleNode<T> */
+    addBefore T :: (DoubleLinkEList T) -> ArrayDoubleNode T */
     addBefore(list) {
         const node = {
             value: BoundedArrayDeque.create(list.capacity),
@@ -96,7 +99,7 @@ const SEList = Object.freeze({
         return node;
     },
     /**
-    append :: (DoubleLinkEList<T>, T) -> DoubleLinkEList<T> */
+    append T :: (DoubleLinkEList T, T) -> DoubleLinkEList T */
     append(list, x) {
         const last = list.dummy.prev;
         if (last === list.dummy
@@ -113,7 +116,7 @@ const SEList = Object.freeze({
         return list;
     },
     /**
-    add :: (DoubleLinkEList<T>, number [uint], T) -> DoubleLinkEList<T> */
+    add T :: (DoubleLinkEList T, number [uint], T) -> DoubleLinkEList T */
     add(list, i, x) {
         if (i < 0) {
             i = 0;
@@ -159,7 +162,7 @@ const SEList = Object.freeze({
         return list;
     },
     /**
-    remove :: (DoubleLinkEList<T>, number [uint]) -> T */
+    remove T :: (DoubleLinkEList T, number [uint]) -> T */
     remove(list, i) {
         if (i < 0) {
             i = 0;
@@ -205,7 +208,7 @@ const SEList = Object.freeze({
         return y;
     },
     /**
-    spread :: (DoubleLinkEList<T>) -> undefined */
+    spread T :: (DoubleLinkEList T) -> undefined */
     spread(list) {
         const selected = list[selected][0];
         let node = selected;
@@ -228,7 +231,7 @@ const SEList = Object.freeze({
         }
     },
     /**
-    gather :: (DoubleLinkEList<T>) -> undefined */
+    gather T :: (DoubleLinkEList T) -> undefined */
     gather(list) {
         const selected = list[selected][0];
         let node = selected;

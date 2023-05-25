@@ -3,16 +3,16 @@
  */
 
 /**
-BinaryNode<T> :: {
-    left: maybe<BinaryNode<T>>,
-    parent: maybe<BinaryNode<T>>,
-    right: maybe<BinaryNode<T>>,
+BinaryNode T :: {
+    left: maybe BinaryNode T,
+    parent: maybe BinaryNode T,
+    right: maybe BinaryNode T,
     value: T
 }
 */
 /**
-BinarySearchTree<T> :: {
-    root: maybe<BinaryNode<T>>,
+BinarySearchTreeRoot T :: {
+    root: maybe BinaryNode T,
     elements: number [uint]
 }
 */
@@ -21,7 +21,7 @@ import {createBinaryNode} from "./basic.js";
 
 const BinarySearchTree = {
     /**
-    create :: () -> BinarySearchTree<T> */
+    create T :: () -> BinarySearchTreeRoot T */
     create() {
         return {
             root: undefined,
@@ -29,7 +29,7 @@ const BinarySearchTree = {
         }
     },
     /**
-    findEq :: (maybe<BinaryNode<T>>, T) -> maybe<BinaryNode<T>> */
+    findEq T :: (maybe BinaryNode T, T) -> maybe BinaryNode T */
     findEq(n, v) {
         while (n !== undefined) {
             if (v < n.value) {
@@ -45,7 +45,7 @@ const BinarySearchTree = {
     // Return the node that have smallest value stored in the tree
     // that is grater than or equal to v.
     /**
-    find :: (maybe<BinaryNode<T>>, T) -> maybe<BinaryNode<T>> */
+    find T :: (maybe BinaryNode T, T) -> maybe BinaryNode T */
     find(n, v) {
         let z;
         while (n !== undefined) {
@@ -65,18 +65,18 @@ const BinarySearchTree = {
         );
     },
     /**
-    add :: (BinarySearchTree<T>, T) -> boolean */
-    add(bst, v) {
-        let p /*:: maybe<BinaryNode<T>>*/;
+    addNode T :: (BinarySearchTreeRoot T, BinaryNode T) -> boolean */
+    addNode(bst, n) {
+        let p /*::maybe BinaryNode T*/;
         // find the node or a proper parent
         {
-            let w /*:: maybe<BinaryNode<T>>*/= bst.root;
-            let prev /*:: maybe<BinaryNode<T>>*/;
+            let w /*:: maybe BinaryNode T*/= bst.root;
+            let prev /*::maybe BinaryNode T*/;
             while (w !== undefined) {
                 prev = w;
-                if (v < w.value) {
+                if (n.value < w.value) {
                     w = w.left;
-                } else if (v > w.value) {
+                } else if (n.value > w.value) {
                     w = w.right;
                 } else {
         // We find the node, then is no need to insert it
@@ -86,15 +86,15 @@ const BinarySearchTree = {
             p = prev;
         }
         // create a new node, and define p as his parent
-        let newN = createBinaryNode(v, p);
+        n.parent = p;
         if (p === undefined) {
         // inserting into empty tree
-            bst.root = newN;
+            bst.root = n;
         } else {
-            if (v < p.value) {
-                p.left = newN;
-            } else { //(v > p.value)
-                p.right = newN;
+            if (n.value < p.value) {
+                p.left = n;
+            } else { //(node.value > p.value)
+                p.right = n;
             }
         // can not be (v === p.value) casue we return false before
         }
@@ -102,9 +102,13 @@ const BinarySearchTree = {
         return true;
     },
     /**
-    removeNode :: (BinarySearchTree<T>, BinaryNode<T>) -> BinarySearchTree<T> */
+    add T :: (BinarySearchTreeRoot T, T) -> boolean */
+    add(bst, v) {
+        return BinarySearchTree.addNode(bst, createBinaryNode(v, undefined));
+    },
+    /**
+    removeNode T :: (BinarySearchTree T, BinaryNode T) -> BinarySearchTree T */
     removeNode(bst, n) {
-        let u /*::BinaryNode<T>*/;
         if (n.left !== undefined && n.right !== undefined) {
         // search the node that have the closest value to the removed node value
         // switch values and remove that node instead
@@ -113,17 +117,21 @@ const BinarySearchTree = {
                 w = w.left;
             }
             n.value = w.value;
-            u = w;
+            BinarySearchTree.splice(bst, w);
         } else {
-            u = n;
+            BinarySearchTree.splice(bst, n);
         }
-        //splice
-        let s /*::maybe<BinaryNode<T>>*/ = (
+        return bst;
+    },
+    /**
+    splice T :: (BinarySearchTree T, BinaryNode T) -> undefined */
+    splice(bst, u) {
+        let s /*::maybe BinaryNode T */ = (
             u.left !== undefined
             ? u.left
             : u.right
         );
-        let p /*::maybe<BinaryNode<T>>*/ = undefined;
+        let p /*::maybe BinaryNode T */ = undefined;
         if (u === bst.root) {
             bst.root = s;
         } else {
@@ -138,10 +146,9 @@ const BinarySearchTree = {
             s.parent = p;
         }
         bst.elements -= 1;
-        return bst;
     },
     /**
-    remove :: (BinarySearchTree<T>, T) -> boolean */
+    remove T :: (BinarySearchTree T, T) -> boolean */
     remove(bst, v) {
         const n = BinarySearchTree.findEq(bst.root, v);
         if (n === undefined) {

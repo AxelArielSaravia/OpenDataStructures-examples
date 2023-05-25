@@ -33,11 +33,8 @@ BinaryNode* binaryNode_find(BinaryNode* bn, T v) {
             return bn;
         }
     }
-    return (
-        z //if z is not a null pointer
-        ? z
-        : 0
-    );
+    // z can be a null pointer
+    return z;
 }
 
 bool binarySearchTree_add(BinarySearchTree bst[static 1], T v) {
@@ -97,6 +94,7 @@ BinarySearchTree* binarySearchTree_remove_node(
     } else {
         u = bn;
     }
+    //Splice
     BinaryNode* s = (
         u->left
         ? u->left

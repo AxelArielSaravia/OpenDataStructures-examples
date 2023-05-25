@@ -5,19 +5,19 @@
  * A SkiplistSSet uses a skiplist structure to implement the SSet interface
  */
 
-/*
-SkipListNode<T> :: {
-    height: number[uint]
-    next: Array<SkipListNode<T>>
+/**
+SkipListNode T :: {
+    height: number [uint]
+    next: Array SkipListNode T
     value: T
 }
 */
-/*
-SkipListSSet<T> :: {
-    heignt: number[uint],
-    length: number[uint],
-    sentinel: SkipListNode<T>
-    stack: Array<SkipListNode<T>>
+/**
+SkipListSSet T :: {
+    heignt: number [uint],
+    length: number [uint],
+    sentinel: SkipListNode T
+    stack: Array<SkipListNode T
 }
 */
 
@@ -34,8 +34,8 @@ function createSkipListNode(value, height) {
 const SkipListSSet = Object.freeze({
     MAX_HEIGHT: 31,
     MAX_RANDOM: 2 ** 31,
-    /*
-    create :: () -> SkipListSSet<T> */
+    /**
+    create T :: () -> SkipListSSet T */
     create() {
         return Object.seal({
             height: 0,
@@ -48,8 +48,8 @@ const SkipListSSet = Object.freeze({
             stack: Array(SkipListSSet.MAX_HEIGHT),
         });
     },
-    /*
-    getNode :: (SkipListSSet<T>, T) -> SkipListNode<T> */
+    /**
+    getNode T :: (SkipListSSet T, T) -> SkipListNode T */
     getNode(skiplist, value) {
         let node = skiplist.sentinel;
         let r = skiplist.height;
@@ -63,8 +63,8 @@ const SkipListSSet = Object.freeze({
         }
         return node.next[0];
     },
-    /*
-    find :: (SkipListSSet<T>, T) -> maybe<T> */
+    /**
+    find T :: (SkipListSSet T, T) -> maybe T */
     find(skiplist, value) {
         const node = SkipListSSet.getNode(skiplist, value);
         return (
@@ -73,9 +73,9 @@ const SkipListSSet = Object.freeze({
             : undefined 
         );
     },
-    /*
-    -- The return is always minor than the MAX_HEIGHT
-    pickHeight :: () -> return number[uint] */
+    // The return is always minor than the MAX_HEIGHT
+    /**
+    pickHeight :: () -> return number [uint] */
     pickHeight() {
         const z = Math.floor(Math.random() * SkipListSSet.MAX_RANDOM);
         let k = 0;
@@ -86,8 +86,8 @@ const SkipListSSet = Object.freeze({
         }
         return k;
     },
-    /*
-    add :: (SkipListSSet<T>, T) -> boolean */
+    /**
+    add T :: (SkipListSSet T, T) -> boolean */
     add(skiplist, value) {
         let node = skiplist.sentinel;
         let r = skiplist.height;
@@ -123,8 +123,8 @@ const SkipListSSet = Object.freeze({
         skiplist.length += 1;
         return true;
     },
-    /*
-    remove :: (SkipListSSet<T>, T) -> boolean */
+    /**
+    remove T :: (SkipListSSet T, T) -> boolean */
     remove(skiplist, value) {
         let removed = false;
         let node = skiplist.sentinel;

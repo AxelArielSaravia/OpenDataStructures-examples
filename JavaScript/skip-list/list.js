@@ -2,27 +2,27 @@
  * Author: Axel Ariel Saravia
  */
 
-/*
-SkipListNode<T> :: {
-    height: number[uint],
-    next: Array<SkipListNode<T>>,
-    length: Array<number[int]>,
+/**
+SkipListNode T :: {
+    height: number [uint],
+    next: Array SkipListNode T,
+    length: Array number [int],
     value: T
 }
 */
-/*
-SkipListList<T> :: {
+/**
+SkipListListT :: {
     heignt: number[uint],
     length: number[uint],
-    sentinel: SkipListNode<T>
+    sentinel: SkipListNodeT
 }
 */
 
 const SkipListList = Object.freeze({
     MAX_HEIGHT: 31,
     MAX_RANDOM: 2 ** 31,
-    /*
-    create :: () -> SkipListList<T> */
+    /**
+    create T :: () -> SkipListList T */
     create() {
         return Object.seal({
             height: 0,
@@ -35,8 +35,8 @@ const SkipListList = Object.freeze({
             }
         });
     },
-    /*
-    getNode :: (SkipListList<T>, number[uint]) -> SkipListNode<T> */
+    /**
+    getNode T :: (SkipListList T, number [uint]) -> SkipListNode T */
     getNode(list, i) {
         if (i < 0 || list.length <= i) {
             return list.sentinel;
@@ -58,13 +58,13 @@ const SkipListList = Object.freeze({
         }
         return node.next[0];
     },
-    /*
-    get :: (SkipListList<T>, number[uint]) -> maybe<T> */
+    /**
+    get T :: (SkipListList T, number [uint]) -> maybe T */
     get(list, i) {
         return (SkipListList.getNode(list, i)).value;
     },
-    /*
-    set :: (SkipListList<T>, number[uint], T) -> maybe<T> */
+    /**
+    set T :: (SkipListList T, number [uint], T) -> maybe T */
     set(list, i, value) {
         const node = SkipListList.getNode(list, i);
         const y = node.value;
@@ -73,9 +73,9 @@ const SkipListList = Object.freeze({
         }
         return y;
     },
-    /*
-    -- The return is always minor than the MAX_HEIGHT
-    pickHeight :: () -> return number[uint] */
+    // The return is always minor than the MAX_HEIGHT
+    /**
+    pickHeight :: () -> return number [uint] */
     pickHeight() {
         const z = Math.floor(Math.random() * SkipListList.MAX_RANDOM);
         let k = 0;
@@ -86,8 +86,8 @@ const SkipListList = Object.freeze({
         }
         return k;
     },
-    /*
-    add :: (SkipListList<T>, number[uint], T) -> SkipListList<T> */
+    /**
+    add T :: (SkipListList T, number [uint], T) -> SkipListList T */
     add(list, i, value) {
         if (i < 0) {
             i = 0;
@@ -129,6 +129,8 @@ const SkipListList = Object.freeze({
         list.length += 1;
         return list;
     },
+    /**
+    remove T :: (SkipListList T, number [uint]) -> T */
     remove(list, i) {
         if (i < 0) {
             i = 0;

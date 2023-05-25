@@ -5,13 +5,52 @@
 # include <assert.h>
 
 # include "./search-tree.c"
+# include "./treap.c"
 
 void binarySearchTreeTest(void);
+void treapTest(void);
 
 int main() {
-    binarySearchTreeTest();
+    //binarySearchTreeTest();
+    treapTest();
     return 0;
 }
+
+void treapTest(void) {
+    Treap treap = {0};
+
+    if (!treap_add(&treap, 23)) return;
+    assert(treap.root);
+    assert(treap.elements == 1);
+    assert(treap.root->value == 23);
+    assert(!treap.root->parent);
+    assert(!treap.root->left);
+    assert(!treap.root->right);
+
+    //add existing element return false
+    assert(treap_add(&treap, 23) == false);
+
+    if (!treap_add(&treap, 2)) return;
+    assert(treap.elements == 2);
+
+    if (!treap_add(&treap, 9)) return;
+    assert(treap.elements == 3);
+
+    if (!treap_add(&treap, 34)) return;
+    assert(treap.elements == 4);
+
+    if (!treap_add(&treap, 1)) return;
+    assert(treap.elements == 5);
+
+    assert(treap_remove(&treap, 9));
+    assert(treap.elements == 4);
+    assert(!treap_find_eq(treap.root, 9));
+
+    //remove a node does not exist return false
+    assert(!treap_remove(&treap, 55));
+
+    treap_clean(&treap);
+};
 
 void binarySearchTreeTest(void) {
     BinarySearchTree tree = {0};

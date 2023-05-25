@@ -24,7 +24,7 @@ DoubleLinkList<T> :: {
 
 const DLList = Object.freeze({
     /**
-    create :: () -> DoubleLinkList<T> */
+    create <T> :: () -> DoubleLinkList<T> */
     create() {
         const dummy = Object.seal({
             value: undefined,
@@ -40,7 +40,7 @@ const DLList = Object.freeze({
 
     },
     /**
-    getNode :: (DoubleLinkList<T>, number[uint]) -> DoubleLinkList<T> */
+    getNode <T> :: (DoubleLinkList<T>, number[uint]) -> DoubleLinkList<T> */
     getNode(list, i) {
         let node;
         if (i < 0) {
@@ -66,12 +66,12 @@ const DLList = Object.freeze({
         return node;
     },
     /**
-    get :: (DoubleLinkList<T>, number[uint]) -> T */
+    get <T> :: (DoubleLinkList<T>, number[uint]) -> T */
     get(list, i) {
         return DLList.getNode(list, i).value;
     },
     /**
-    set :: (DoubleLinkList<T>, number[uint], T) -> T */
+    set <T> :: (DoubleLinkList<T>, number[uint], T) -> T */
     set(list, i, x) {
         const node = DLList.getNode(list, i);
         const res = node.value;
@@ -79,7 +79,7 @@ const DLList = Object.freeze({
         return res;
     },
     /**
-    add :: (DoubleLinkList<T>, number[uint], T) -> DoubleLinkList<T> */
+    add <T> :: (DoubleLinkList<T>, number[uint], T) -> DoubleLinkList<T> */
     add(list, i, x) {
         const node = DLList.getNode(list, i);
         const newNode = {
@@ -93,7 +93,7 @@ const DLList = Object.freeze({
         return list;
     },
     /**
-    remove :: (DoubleLinkList<T>, number[uint]) -> T */
+    remove <T> :: (DoubleLinkList<T>, number[uint]) -> T */
     remove(list, i) {
         const node = DLList.getNode(list, i);
         const value = node.value;
@@ -103,7 +103,7 @@ const DLList = Object.freeze({
         return value;
     },
     /**
-    clear :: (DoubleLinkList<T>) -> undefined */
+    clear <T> :: (DoubleLinkList<T>) -> undefined */
     clear(list) {
         list.length = 0
         list.dummy.prev = list.dummy;

@@ -9,11 +9,47 @@ import {
 } from "./basic.js";
 
 import BinarySearchTree from "./searchTree.js";
+import Treap from "./treap.js";
 
 // Main Execution
 {
     //BasicTest();
-    BinarySearchTreeTest();
+    //BinarySearchTreeTest();
+    TreapTest();
+}
+
+function TreapTest() {
+    const treap = Treap.create();
+
+    assert(Treap.add(treap, 23));
+    assert(treap.root !== undefined);
+    assert(treap.elements === 1);
+    assert(treap.root.value === 23);
+    assert(treap.root.parent === undefined);
+    assert(treap.root.left === undefined);
+    assert(treap.root.right === undefined);
+
+    //add existing element return false
+    assert(!Treap.add(treap, 23));
+
+    assert(Treap.add(treap, 2));
+    assert(treap.elements === 2);
+
+    assert(Treap.add(treap, 9));
+    assert(treap.elements === 3);
+
+    assert(Treap.add(treap, 34));
+    assert(treap.elements === 4);
+
+    assert(Treap.add(treap, 1));
+    assert(treap.elements === 5);
+
+    assert(Treap.remove(treap, 9));
+    assert(treap.elements === 4);
+    assert(BinarySearchTree.findEq(treap.root, 9) === undefined);
+
+    //remove a node does not exist return false
+    assert(!Treap.remove(treap, 55));
 }
 
 function BinarySearchTreeTest() {

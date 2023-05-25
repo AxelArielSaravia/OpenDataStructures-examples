@@ -3,9 +3,9 @@
  */
 
 /**
-BoundedDeque<T> :: {
+BoundedDeque T :: {
     capacity: number[uint > 0],
-    content: Array<T>,
+    content: Array T,
     head: number[uint],
     length: number[uint]
 }
@@ -13,7 +13,7 @@ BoundedDeque<T> :: {
 
 const BoundedArrayDeque = Object.freeze({
     /**
-    create :: () -> BoundedDeque<T> */
+    create T :: () -> BoundedDeque T */
     create(capacity) {
         if (typeof capacity !== "number" || capacity < 4) {
             capacity = 4;
@@ -26,7 +26,7 @@ const BoundedArrayDeque = Object.freeze({
         });
     },
     /**
-    get :: (BoundedDeque<T>, number [uint]) -> maybe<T> */
+    get T :: (BoundedDeque T, number [uint]) -> maybe T */
     get(deque, i) {
         if (0 <= i && i < deque.length) {
             const j = (i + deque.head) % deque.capacity;
@@ -34,7 +34,7 @@ const BoundedArrayDeque = Object.freeze({
         }
     },
     /**
-    set :: (BoundedDeque<T>, number [uint], T) -> maybe<T> */
+    set T :: (BoundedDeque T, number [uint], T) -> maybe T */
     set(deque, i, x) {
         if (0 <= i && i < deque.length) {
             const j = (i + deque.head) % deque.capacity;
@@ -44,7 +44,7 @@ const BoundedArrayDeque = Object.freeze({
         }
     },
     /**
-    add :: (BoundedDeque<T>, number [uint], T) -> BoundedDeque<T> */
+    add T :: (BoundedDeque T, number [uint], T) -> BoundedDeque T */
     add(deque, i, x) {
         if (deque.length === deque.capacity) {
             return deque;
@@ -74,7 +74,7 @@ const BoundedArrayDeque = Object.freeze({
         return queue;
     },
     /**
-    remove :: (BoundedDeque<T>, number [uint]) -> maybe<T> */
+    remove T :: (BoundedDeque T, number [uint]) -> maybe T */
     remove(deque, i) {
         if (deque.length === 0) {
             return;
@@ -104,7 +104,7 @@ const BoundedArrayDeque = Object.freeze({
         return x;
     },
     /**
-    clear :: (BoundedDeque<T>) -> undefined */
+    clear T :: (BoundedDeque T) -> undefined */
     clear(deque) {
         deque.head = 0;
         deque.length = 0;

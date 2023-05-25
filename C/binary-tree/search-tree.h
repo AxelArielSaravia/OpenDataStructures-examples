@@ -29,7 +29,7 @@ BinaryNode* binaryNode_find_eq(BinaryNode*, T);
 BinaryNode* binaryNode_find(BinaryNode*, T);
 
 /*
- Return false if the value exist in the tree or the allocation failse,
+ Return false if the value exist in the tree or the allocation fails,
  otherwise true
 */
 bool binarySearchTree_add(BinarySearchTree bst[static 1], T);
@@ -45,7 +45,7 @@ BinarySearchTree* binarySearchTree_remove_node(
 
 /*
  Return false if does not exist any node with that value,
- otherwise return true
+ otherwise true
 */
 bool binarySearchTree_remove(BinarySearchTree bst[static 1], T);
 

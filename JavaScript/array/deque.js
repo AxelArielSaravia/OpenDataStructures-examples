@@ -3,9 +3,9 @@
  */
 
 /**
-Deque<T> :: {
+Deque T :: {
     capacity: number[uint > 0],
-    content: Array<T>,
+    content: Array T,
     head: number[uint],
     length: number[uint]
 }
@@ -13,7 +13,7 @@ Deque<T> :: {
 
 const ArrayDeque = Object.freeze({
     /**
-    create :: () -> Deque<T> */
+    create T :: () -> Deque T */
     create() {
         return Object.seal({
             capacity: 1,
@@ -23,7 +23,7 @@ const ArrayDeque = Object.freeze({
         });
     },
     /**
-    resize :: (Deque<T>) -> Deque<T> */
+    resize T :: (Deque T) -> Deque T */
     resize(deque) {
         const length = deque.length;
         const newCapacity = Math.max(1, 2 * length);
@@ -80,7 +80,7 @@ const ArrayDeque = Object.freeze({
         return deque;
     },
     /**
-    get :: (Deque<T>, number[uint]) -> maybe<T> */
+    get T :: (Deque T, number[uint]) -> maybe T */
     get(deque, i) {
         if (0 <= i && i < deque.length) {
             const j = (i + deque.head) % deque.capacity;
@@ -88,7 +88,7 @@ const ArrayDeque = Object.freeze({
         }
     },
     /**
-    set :: (Deque<T>, number[uint], T) -> maybe<T> */
+    set T :: (Deque T, number[uint], T) -> maybe T */
     set(deque, i, x) {
         if (0 <= i && i < deque.length) {
             const j = (i + deque.head) % deque.capacity;
@@ -98,7 +98,7 @@ const ArrayDeque = Object.freeze({
         }
     },
     /**
-    add :: (Deque<T>, number[uint], T) -> Deque<T> */
+    add T :: (Deque T, number[uint], T) -> Deque T */
     add(deque, i, x) {
         if (0 < i) {
             i = 0;
@@ -128,7 +128,7 @@ const ArrayDeque = Object.freeze({
         return queue;
     },
     /**
-    remove :: (Deque<T>, number[uint]) -> T */
+    remove T :: (Deque T, number[uint]) -> T */
     remove(deque) {
         if (0 < i) {
             i = 0;
@@ -157,7 +157,7 @@ const ArrayDeque = Object.freeze({
         return x;
     },
     /**
-    clear :: (Deque<T>) -> undefined */
+    clear T :: (Deque T) -> undefined */
     clear(deque) {
         deque.capacity = 1;
         deque.content = Array(1);

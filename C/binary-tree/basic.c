@@ -165,15 +165,14 @@ BinaryNode binaryNode_create(T v, BinaryNode* const parent) {
 
 BinaryNode* binaryNodep_create(T v, BinaryNode* const parent) {
     BinaryNode* res = malloc(sizeof(BinaryNode));
-    if (!res) {
-        return 0;
+    if (res) {
+        *res = (BinaryNode){
+            .left = 0,
+            .parent = parent,
+            .right = 0,
+            .value = v,
+        };
     }
-    *res = (BinaryNode){
-        .left = 0,
-        .parent = parent,
-        .right = 0,
-        .value = v,
-    };
     return res;
 }
 

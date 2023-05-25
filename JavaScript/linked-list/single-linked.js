@@ -18,7 +18,7 @@ LinkedList<T> :: {
 
 const SLList = Object.freeze({
     /**
-    create :: () -> LinkedList<T> */
+    create <T> :: () -> LinkedList<T> */
     create() {
         return Object.seal({
             head: undefined,
@@ -27,7 +27,7 @@ const SLList = Object.freeze({
         });
     },
     /**
-    push :: (LinkedList<T>, T) -> LinkedList<T> */
+    push <T> :: (LinkedList<T>, T) -> LinkedList<T> */
     push(list, x) {
         /* node :: Node<T> */
         const node = {
@@ -42,7 +42,7 @@ const SLList = Object.freeze({
         return list;
     },
     /**
-    pop :: (LinkedList<T>) -> maybe<T> */
+    pop <T> :: (LinkedList<T>) -> maybe<T> */
     pop(list) {
         if (list.length === 0) {
             return;
@@ -56,7 +56,7 @@ const SLList = Object.freeze({
         return value;
     },
     /**
-    add :: (LinkedList<T>, T) -> LinkedList<T> */
+    add <T> :: (LinkedList<T>, T) -> LinkedList<T> */
     add(list, x) {
         const node = {
             next: undefined,
@@ -72,12 +72,12 @@ const SLList = Object.freeze({
         return list;
     },
     /**
-    remove :: (LinkedList<T>) -> T */
+    remove <T> :: (LinkedList<T>) -> T */
     remove(list) {
         return SLList.pop(list);
     },
     /**
-    removeFromTail :: (LinkedList<T>) -> T*/
+    removeFromTail <T> :: (LinkedList<T>) -> T*/
     removeFromTail(list) {
         if (list.length === 0) {
             return;
@@ -97,7 +97,7 @@ const SLList = Object.freeze({
         return value;
     },
     /**
-    clear :: (LinkedList<T>) -> LinkedList<T> */
+    clear <T> :: (LinkedList<T>) -> LinkedList<T> */
     clear(list) {
         list.head = undefined;
         list.tail = undefined;

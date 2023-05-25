@@ -3,16 +3,23 @@
  */
 
 /**
-BinaryNode<T> :: {
-    left: maybe<BinaryNode<T>>,
-    parent: maybe<BinaryNode<T>>,
-    right: maybe<BinaryNode<T>>,
+BinaryNode T :: {
+    left: maybe BinaryNode T,
+    parent: maybe BinaryNode T,
+    right: maybe BinaryNode T,
     value: T
 }
 */
 
 /**
-createNode :: (T, maybe<BinaryNode<T>>) -> BinaryNode<T> */
+BinaryTreeRoot T :: {
+    root: maybe BinaryNode T,
+    elements: number [uint]
+}
+*/
+
+/**
+createNode T :: (T, maybe BinaryNode T) -> BinaryNode T */
 function createBinaryNode(value, parent) {
     return {
         left: undefined,
@@ -24,15 +31,15 @@ function createBinaryNode(value, parent) {
 
 const BinaryTree = {
     /**
-    create :: (maybe<BinaryNode<T>>) -> {root: maybe<BinaryNode<T>>, size: number [uint]}*/
+    create T :: (maybe BinaryNode T) -> BinaryTreeRoot T */
     create(root) {
         return {
             root,
-            size: 0
+            elements: 0
         };
     },
     /**
-    depth :: (BinaryNode<T>) -> number [uint] */
+    depth T :: (BinaryNode T) -> number [uint] */
     depth(node) {
         let d = 0;
         while (node !== undefined) {
@@ -42,7 +49,7 @@ const BinaryTree = {
         return d;
     },
     /**
-    recursive_size :: (maybe<BinaryNode<T>>) -> number [uint] */
+    recursive_size T :: (maybe BinaryNode T) -> number [uint] */
     recursive_size(root) {
         return (
             root === undefined
@@ -55,7 +62,7 @@ const BinaryTree = {
         );
     },
     /**
-    recursive_height :: (maybe<BinaryNode<T>>) -> number [uint] */
+    recursive_height T :: (maybe BinaryNode T) -> number [uint] */
     recursive_height(root) {
         return (
             root === undefined
@@ -67,7 +74,7 @@ const BinaryTree = {
         );
     },
     /**
-    size :: */
+    size T :: (maybe BinaryNode T) -> number [uint] */
     size(root) {
     // Based in the traverse function
         let n = 0;
@@ -101,7 +108,7 @@ const BinaryTree = {
         return n;
     },
     /**
-    height :: (maybe<BinaryNode<T>>) -> number [uint] */
+    height T :: (maybe BinaryNode T) -> number [uint] */
     height(root) {
     // Based in the traverse function
         let n = 0;  // keeps the depthes value
@@ -146,7 +153,7 @@ const BinaryTree = {
 //This function shows diferent algoritms to traverse a binary tree
 
 /**
-recursive_travese :: (maybe<BinaryNode<T>>) -> undefined */
+recursive_travese :: (maybe<BinaryNode T) -> undefined */
 function recursive_traverse(root) {
     if (root === undefined) {
         return;
@@ -156,7 +163,7 @@ function recursive_traverse(root) {
 }
 
 /**
-traverse :: (BinaryNode<T>) -> undefined */
+traverse :: (BinaryNode T) -> undefined */
 function traverse(root) {
 //This traverse sometimes is called first-depth traverse
     let u = root;
@@ -191,7 +198,7 @@ function traverse(root) {
 // couse that we need to use a list or a stack to keep track of the path
 // from the current node to the root
 /**
-travese2 :: (BinaryNode<T>) -> undefined */
+travese2 :: (BinaryNode T) -> undefined */
 function traverse2(root) {
     const stack = [root];
     let u;
@@ -225,7 +232,7 @@ function traverse2(root) {
 }
 
 /**
-breadthFirstTraversal :: (BinaryNode<T>) -> undefined */
+breadthFirstTraversal :: (BinaryNode T) -> undefined */
 function breadthFirstTraversal(root) {
     const queue = [root];
     let u;

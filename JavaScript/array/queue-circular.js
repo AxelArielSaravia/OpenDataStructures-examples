@@ -3,23 +3,23 @@
  */
 
 /**
-FixedArray<T> :: {
+FixedArray T :: {
     length: number [uint]
     [0..]: T
 }
 
 */
 /**
-CircularQueue<T> :: {
+CircularQueue T :: {
     capacity: number [uint > 0],
-    content: FixedArray<T>,
+    content: FixedArray T,
     head: number [uint],
     length: number [uint]
 }
 */
 
 /**
-createFixedArray :: (number [uint > 0]) -> FixedArray<T> */
+createFixedArray T :: (number [uint > 0]) -> FixedArray T */
 function createFixedArray(capacity) {
     if (!Number.isSafeInteger(capacity) || capacity < 1) {
         throw new Error("capacity is not a unsigned integer");
@@ -35,7 +35,7 @@ function createFixedArray(capacity) {
 
 const CircularArrayQueue = Object.freeze({
     /**
-    create :: (number [uint > 0]) -> CircularQueue<T> */
+    create T :: (number [uint > 0]) -> CircularQueue T */
     create(capacity) {
         return Object.seal({
             capacity: capacity,
@@ -45,7 +45,7 @@ const CircularArrayQueue = Object.freeze({
         });
     },
     /**
-    add :: (CircularQueue<T>, T) -> boolean */
+    add T :: (CircularQueue T, T) -> boolean */
     add(queue, x) {
         if (queue.length !== queue.capacity) {
             queue.content[queue.head] = x;
@@ -57,7 +57,7 @@ const CircularArrayQueue = Object.freeze({
         }
     },
     /**
-    remove :: (CircularQueue<T>) -> boolean */
+    remove T :: (CircularQueue T) -> boolean */
     remove(queue) {
         if (queue.length > 0) {
             queue.length -= 1;

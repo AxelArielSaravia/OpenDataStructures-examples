@@ -4,8 +4,8 @@
 
 import ArrayStack from "./stack.js";
 /**
-RootishStack<T> :: {
-    blocks: Stack<T>,
+RootishStack T :: {
+    blocks: Stack T,
     length: number [uint]
 }
 */
@@ -18,7 +18,7 @@ function i2b(i) {
 
 const RootishArrayStack = Object.freeze({
     /**
-    create :: () -> RootishStack<T> */
+    create T :: () -> RootishStack T */
     create() {
         return Object.seal({
             blocks: ArrayStack(),
@@ -26,7 +26,7 @@ const RootishArrayStack = Object.freeze({
         });
     },
     /**
-    grow :: (RootishStack<T>) -> RootishStack<T> */
+    grow T :: (RootishStack T) -> RootishStack T */
     grow(stack) {
         return ArrayStack.add(
             stack.blocks,
@@ -35,14 +35,14 @@ const RootishArrayStack = Object.freeze({
         );
     },
     /**
-    get :: (RootishStack<T>, number [uint]) -> maybe<T> */
+    get T :: (RootishStack T, number [uint]) -> maybe T */
     get(stack, i) {
         const b = i2b(i);
         const j = i - ((b * (b + 1)) / 2);
         return ArrayStack.get(stack, b)?.[j];
     },
     /**
-    shrink :: (RootishStack<T>, number [uint]) -> maybe<T> */
+    shrink T :: (RootishStack T, number [uint]) -> maybe T */
     shrink(stack) {
         let r = stack.blocks.length;
         while (
@@ -58,7 +58,7 @@ const RootishArrayStack = Object.freeze({
         return stack;
     },
     /**
-    set :: (RootishStack<T>, number [uint], T) -> maybe<T> */
+    set T :: (RootishStack T, number [uint], T) -> maybe T */
     set(stack, i, x) {
         const b = i2b(i);
         const j = i - ((b * (b + 1)) / 2);
@@ -71,7 +71,7 @@ const RootishArrayStack = Object.freeze({
         return y
     },
     /**
-    add :: (RootishStack<T>, number [uint], T) -> RootishStack<T> */
+    add T :: (RootishStack T, number [uint], T) -> RootishStack T */
     add(stack, i, x) {
         const r = stack.blocks.length;
         if (r * (r + 1) / 2 < stack.length + 1) {
@@ -87,7 +87,7 @@ const RootishArrayStack = Object.freeze({
         }
     },
     /**
-    remove :: (RootishStack<T>, number [uint]) -> T */
+    remove T :: (RootishStack T, number [uint]) -> T */
     remove(stack, i) {
         const x = RootishArrayStack.get(stack, i);
         for (let j = i; j < stack.length - 1; i += 1) {

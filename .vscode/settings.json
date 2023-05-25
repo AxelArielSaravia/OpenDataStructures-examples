@@ -3,6 +3,13 @@
         "vector": "c",
         "string_view": "c",
         "stdlib.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "optional": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }

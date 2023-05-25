@@ -5,15 +5,15 @@
 import ArrayStack from "./stack.js";
 
 /**
-DualDeque<T> :: {
-    front: Stack<T>
-    back: Stack<T>
+DualDeque T :: {
+    front: Stack T
+    back: Stack T
 }
 */
 
 const DualArrayDeque = Object.freeze({
     /**
-    create :: () -> DualDeque<T> */
+    create T :: () -> DualDeque T */
     create() {
         return Object.seal({
             front: ArrayStack.create(),
@@ -21,7 +21,7 @@ const DualArrayDeque = Object.freeze({
         });
     },
     /**
-    balance :: (DualDeque<T>) -> DualDeque<T>*/
+    balance T :: (DualDeque T) -> DualDeque T */
     balance(deque) {
         const n = DualArrayDeque.size(deque);
         const mid = Math.floor(n / 2);
@@ -51,12 +51,12 @@ const DualArrayDeque = Object.freeze({
         return deque;
     },
     /**
-    size :: (DualDeque<T>) -> number[uint] */
+    size T :: (DualDeque T) -> number[uint] */
     size(deque) {
         return deque.front.length + deque.back.length
     },
     /**
-    get :: (DualDeque<T>, number [uint]) -> maybe<T> */
+    get T :: (DualDeque T, number [uint]) -> maybe T */
     get(deque, i) {
         return (
             i < deque.front.length
@@ -65,7 +65,7 @@ const DualArrayDeque = Object.freeze({
         );
     },
     /**
-    add :: (DualDeque<T>, number [uint], T) -> DualDeque<T> */
+    add T :: (DualDeque T, number [uint], T) -> DualDeque T */
     add(deque, i, x) {
         if (i < deque.front.length) {
             ArrayStack.add(
@@ -83,7 +83,7 @@ const DualArrayDeque = Object.freeze({
         return DualArrayDeque.balance(deque);
     },
     /**
-    remove :: (DualDeque<T>, number [uint]) > T */
+    remove T :: (DualDeque T, number [uint]) -> T */
     remove(deque, i) {
         const x = (
             i < deque.front.length
