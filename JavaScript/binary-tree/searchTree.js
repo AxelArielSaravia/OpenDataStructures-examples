@@ -17,7 +17,16 @@ BinarySearchTreeRoot T :: {
 }
 */
 
-import {createBinaryNode} from "./basic.js";
+/**
+createBinaryNode T :: (T, maybe BinaryNode T) -> BinaryNode T */
+function createBinaryNode(v, p) {
+    return {
+        left: undefined,
+        parent: p,
+        right: undefined,
+        value: v
+    };
+}
 
 const BinarySearchTree = {
     /**
@@ -107,23 +116,6 @@ const BinarySearchTree = {
         return BinarySearchTree.addNode(bst, createBinaryNode(v, undefined));
     },
     /**
-    removeNode T :: (BinarySearchTree T, BinaryNode T) -> BinarySearchTree T */
-    removeNode(bst, n) {
-        if (n.left !== undefined && n.right !== undefined) {
-        // search the node that have the closest value to the removed node value
-        // switch values and remove that node instead
-            let w = n.right;
-            while (w.left !== undefined) {
-                w = w.left;
-            }
-            n.value = w.value;
-            BinarySearchTree.splice(bst, w);
-        } else {
-            BinarySearchTree.splice(bst, n);
-        }
-        return bst;
-    },
-    /**
     splice T :: (BinarySearchTree T, BinaryNode T) -> undefined */
     splice(bst, u) {
         let s /*::maybe BinaryNode T */ = (
@@ -146,6 +138,23 @@ const BinarySearchTree = {
             s.parent = p;
         }
         bst.elements -= 1;
+    },
+    /**
+    removeNode T :: (BinarySearchTree T, BinaryNode T) -> BinarySearchTree T */
+    removeNode(bst, n) {
+        if (n.left !== undefined && n.right !== undefined) {
+        // search the node that have the closest value to the removed node value
+        // switch values and remove that node instead
+            let w = n.right;
+            while (w.left !== undefined) {
+                w = w.left;
+            }
+            n.value = w.value;
+            BinarySearchTree.splice(bst, w);
+        } else {
+            BinarySearchTree.splice(bst, n);
+        }
+        return bst;
     },
     /**
     remove T :: (BinarySearchTree T, T) -> boolean */

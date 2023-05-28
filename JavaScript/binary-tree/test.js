@@ -10,12 +10,61 @@ import {
 
 import BinarySearchTree from "./searchTree.js";
 import Treap from "./treap.js";
+import ScapegoatTree from "./scapegoat.js";
+
 
 // Main Execution
 {
     //BasicTest();
     //BinarySearchTreeTest();
-    TreapTest();
+    //TreapTest();
+    ScapegoatTreeTest();
+}
+
+function ScapegoatTreeTest() {
+    const st = ScapegoatTree.create();
+
+    assert(ScapegoatTree.add(st, 23));
+    assert(st.root !== undefined);
+    assert(st.elements === 1);
+    assert(st.counter === 1);
+    assert(st.root.value === 23);
+    assert(st.root.parent === undefined);
+    assert(st.root.left === undefined);
+    assert(st.root.right === undefined);
+
+    //add existing element return false
+    assert(!ScapegoatTree.add(st, 23));
+
+    assert(ScapegoatTree.add(st, 2));
+    assert(st.elements === 2);
+    assert(st.root.value === 23);
+    assert(st.root.left.value === 2);
+
+    assert(ScapegoatTree.add(st, 9));
+    assert(st.elements === 3);
+
+    assert(ScapegoatTree.add(st, 34));
+    assert(st.elements === 4);
+
+    assert(ScapegoatTree.add(st, 1));
+    assert(st.elements === 5);
+
+    assert(st.root.value === 23);
+    assert(st.root.left.value === 2);
+    assert(st.root.left.left.value === 1);
+    assert(st.root.left.right.value === 9);
+    assert(st.root.right.value === 34);
+
+    assert(ScapegoatTree.add(st, 7));
+    assert(st.elements === 6);
+
+    assert(ScapegoatTree.add(st, 8));
+    assert(st.elements === 7);
+
+    assert(ScapegoatTree.add(st, 7.5));
+    assert(st.elements === 8);
+
 }
 
 function TreapTest() {
