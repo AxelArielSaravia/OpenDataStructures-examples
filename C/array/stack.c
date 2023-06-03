@@ -54,7 +54,7 @@ stack stack_add(stack s, size_t i, T const x) {
     if (s.length == s.capacity) {
         s = stack_resize(s);
     }
-    for (size_t j = s.length; i < j; j += 1) {
+    for (size_t j = s.length; i < j; j -= 1) {
         s.content[j] = s.content[j - 1];
     }
     s.content[i] = x;

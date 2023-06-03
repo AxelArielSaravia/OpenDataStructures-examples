@@ -21,7 +21,7 @@
 
 # include "single-linked.h"
 
-sllist* sllist_push(sllist* l, T const x) {
+sllist* sllist_add_head(sllist* l, T const x) {
     if (l) {
         slnode* n = malloc(sizeof(slnode));
         if (!n) {
@@ -40,7 +40,7 @@ sllist* sllist_push(sllist* l, T const x) {
     }
 }
 
-sllist* sllist_add(sllist l[static 1], T const x) {
+sllist* sllist_add_tail(sllist l[static 1], T const x) {
     slnode* n = malloc(sizeof(slnode));
     if (!n) {
         return 0;
@@ -60,12 +60,12 @@ sllist* sllist_add(sllist l[static 1], T const x) {
     return l;
 }
 
-T sllist_pop(sllist l[static 1]) {
+T sllist_remove_head(sllist l[static 1]) {
     T res = 0;
     if (l->length != 0) {
         slnode* head = l->head;
-        res = l->head->value;
-        l->head = l->head->next;
+        res = head->value;
+        l->head = head->next;
         l->length -= 1;
         if (l->length == 0) {
             l->tail = 0;
@@ -75,11 +75,7 @@ T sllist_pop(sllist l[static 1]) {
     return res;
 };
 
-T sllist_remove(sllist l[static 1]) {
-    return sllist_pop(l);
-}
-
-T sllist_removeFromTail(sllist l[static 1]) {
+T sllist_remove_tail(sllist l[static 1]) {
     T res = 0;
     if (l->length != 0) {
         res = l->tail->value;

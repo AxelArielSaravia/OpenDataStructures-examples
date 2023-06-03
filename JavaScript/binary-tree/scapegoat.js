@@ -291,27 +291,4 @@ function packIntoArray(n) {
     return a;
 }
 
-
-/**
-buildBalance_recursive T :: (Array BinaryNode T, number [uint], number [ns]) -> maybe BinaryNode T */
-function buildBalance_recursive(a, i, ns) {
-    if (ns === 0) {
-        return undefined;
-    }
-    const m = Math.floor(ns / 2);
-    const n = a[i+m];
-    n.left = ScapegoatTree.buildBalance_recursive(a, i, m);
-    if (n.left !== undefined) {
-        n.left.parent = n;
-    }
-    n.right = ScapegoatTree.buildBalance_recursive(a, i + m + 1, ns - m - 1);
-    if (n.right !== undefined) {
-        n.right.parent = n;
-    }
-    return n;
-}
-
-function buildBalance(a, i, ns) {
-
-}
 export default ScapegoatTree;

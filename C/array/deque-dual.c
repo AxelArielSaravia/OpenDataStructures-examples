@@ -84,10 +84,9 @@ dualDeque dual_deque_remove(dualDeque ddq, size_t const i) {
 }
 
 dualDeque dual_deque_balance(dualDeque ddq) {
-    size_t const n = dual_deque_size(ddq);
     size_t const flength = ddq.front.length;
     size_t const blength = ddq.back.length;
-    size_t mid = n / 2;
+    size_t mid = (flength + blength) / 2;
     if (3 * flength < blength || 3 * blength < flength) {
         stack front = stack_create();
         stack back = stack_create();
@@ -96,7 +95,7 @@ dualDeque dual_deque_balance(dualDeque ddq) {
             T x = dual_deque_get(ddq, idx);
             front = stack_add(front, i, x);
         }
-        for (size_t i = 0; i < n - mid; i += 1) {
+        for (size_t i = 0; i < flength + blength - mid; i += 1) {
             size_t idx = mid + i;
             T x = dual_deque_get(ddq, idx);
             back = stack_add(back, i, x);

@@ -82,7 +82,7 @@ deque deque_remove(deque dq, size_t i) {
     size_t z1 = (dq.head + i) % dq.capacity;
     size_t z2 = 0;
     if (dq.length <= i) {
-        i = dq.length - i;
+        i = dq.length - 1;
     }
     if (i < dq.length / 2) {
         for (size_t k = i; k; k -= 1) {

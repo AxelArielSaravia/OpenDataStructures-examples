@@ -4,12 +4,12 @@
 
 #include "./treap.h"
 
-TreapNode* treapNode_create(T v, TreapNode* const p) {
-    TreapNode* tn = malloc(sizeof(*tn));
+treapNode* treapNode_create(T v, treapNode* const p) {
+    treapNode* tn = malloc(sizeof(*tn));
     if (tn) {
         srand(time(0));
         signed r = rand();
-        *tn = (TreapNode){
+        *tn = (treapNode){
             .left = 0,
             .parent = p,
             .right = 0,
@@ -20,10 +20,10 @@ TreapNode* treapNode_create(T v, TreapNode* const p) {
     return tn;
 }
 
-void treapNode_free(TreapNode* root) {
-    TreapNode* u = root;
-    TreapNode* prv = 0;
-    TreapNode* nxt = 0;
+void treapNode_free(treapNode* root) {
+    treapNode* u = root;
+    treapNode* prv = 0;
+    treapNode* nxt = 0;
     while (u) {
         if (prv == u->parent) {
     // Visit a node for the first time
@@ -55,9 +55,22 @@ void treapNode_free(TreapNode* root) {
     }
 }
 
+treapNode* treap_find_eq(treapNode* tn, T v) {
+    while (tn) {
+        T y = tn->value;
+        if (v < y) {
+            tn = tn->left;
+        } else if (v > y) {
+            tn = tn->right;
+        } else {
+            return tn;
+        }
+    }
+    return 0;
+}
 
-void treap_rotate_left(Treap* t, TreapNode* tn) {
-    TreapNode* w = tn->right;
+void treap_rotate_left(treap* t, treapNode* tn) {
+    treapNode* w = tn->right;
     w->parent = tn->parent;
     if (w->parent) {
         if (w->parent->left == tn) {
@@ -78,8 +91,8 @@ void treap_rotate_left(Treap* t, TreapNode* tn) {
     }
 }
 
-void treap_rotate_right(Treap* t, TreapNode* tn) {
-    TreapNode* w = tn->left;
+void treap_rotate_right(treap* t, treapNode* tn) {
+    treapNode* w = tn->left;
     w->parent = tn->parent;
     if (w->parent) {
         if (w->parent->left == tn) {
@@ -100,30 +113,15 @@ void treap_rotate_right(Treap* t, TreapNode* tn) {
     }
 }
 
-TreapNode* treap_find_eq(TreapNode* tn, T v) {
-     while (tn) {
-        T y = tn->value;
-        if (v < y) {
-            tn = tn->left;
-        } else if (v > y) {
-            tn = tn->right;
-        } else {
-            return tn;
-        }
-    }
-    return 0;
-}
-
-
-bool treap_add(Treap t[static 1], T v) {
-    TreapNode* new_tn = 0;
+bool treap_add(treap t[static 1], T v) {
+    treapNode* new_tn = 0;
     //Add Node
     {
-        TreapNode* p = 0;
+        treapNode* p = 0;
     // find the node or a proper parent
         {
-            TreapNode* w = t->root;
-            TreapNode* prev = 0;
+            treapNode* w = t->root;
+            treapNode* prev = 0;
             while (w) {
                 T y = w->value;
                 prev = w;
@@ -172,8 +170,8 @@ bool treap_add(Treap t[static 1], T v) {
     return true;
 }
 
-bool treap_remove(Treap t[static 1], T v) {
-    TreapNode* tn = treap_find_eq(t->root, v);
+bool treap_remove(treap t[static 1], T v) {
+    treapNode* tn = treap_find_eq(t->root, v);
     if (!tn || tn->value != v) {
         return false;
     }
@@ -194,12 +192,12 @@ bool treap_remove(Treap t[static 1], T v) {
     }
     //Splice
     {
-        TreapNode* s = (
+        treapNode* s = (
             tn->left
             ? tn->left
             : tn->right
         );
-        TreapNode* p = 0;
+        treapNode* p = 0;
         if (tn == t->root) {
             t->root = s;
         } else {
@@ -219,9 +217,9 @@ bool treap_remove(Treap t[static 1], T v) {
     return true;
 }
 
-Treap* treap_clean(Treap t[static 1]) {
+treap* treap_clean(treap t[static 1]) {
     treapNode_free(t->root);
     free(t->root);
-    *t = (Treap){0};
+    *t = (treap){0};
     return t;
 }

@@ -4,9 +4,7 @@
 
 # include "./search-tree.h"
 
-
-
-BinaryNode* binaryNode_find_eq(BinaryNode* bn, T v) {
+binaryNode* binaryNode_find_eq(binaryNode* bn, T v) {
     while (bn) {
         T y = bn->value;
         if (v < y) {
@@ -20,8 +18,8 @@ BinaryNode* binaryNode_find_eq(BinaryNode* bn, T v) {
     return 0;
 }
 
-BinaryNode* binaryNode_find(BinaryNode* bn, T v) {
-    BinaryNode* z = 0;
+binaryNode* binaryNode_find(binaryNode* bn, T v) {
+    binaryNode* z = 0;
     while (bn) {
         T y = bn->value;
         if (v < y) {
@@ -37,12 +35,12 @@ BinaryNode* binaryNode_find(BinaryNode* bn, T v) {
     return z;
 }
 
-bool binarySearchTree_add(BinarySearchTree bst[static 1], T v) {
-    BinaryNode* p = 0;
+bool binarySearchTree_add(binarySearchTree bst[static 1], T v) {
+    binaryNode* p = 0;
     // find the node or a proper parent
     {
-        BinaryNode* w = bst->root;
-        BinaryNode* prev = 0;
+        binaryNode* w = bst->root;
+        binaryNode* prev = 0;
         while (w) {
             T y = w->value;
             prev = w;
@@ -58,7 +56,7 @@ bool binarySearchTree_add(BinarySearchTree bst[static 1], T v) {
         p = prev;
     }
     // create a new node, and define p as his parent
-    BinaryNode* new_bn = binaryNodep_create(v, p);
+    binaryNode* new_bn = binaryNodep_create(v, p);
     if (!new_bn) {
         return false;
     }
@@ -77,15 +75,15 @@ bool binarySearchTree_add(BinarySearchTree bst[static 1], T v) {
 }
 
 
-BinarySearchTree* binarySearchTree_remove_node(
-    BinarySearchTree bst[static 1],
-    BinaryNode bn[static 1]
+binarySearchTree* binarySearchTree_remove_node(
+    binarySearchTree bst[static 1],
+    binaryNode bn[static 1]
 ) {
-    BinaryNode* u = 0;
+    binaryNode* u = 0;
     if (bn->left && bn->right) {
     // search the node that have the closest value to the removed node value
     // switch values and remove that node instead
-        BinaryNode* w = bn->right;
+        binaryNode* w = bn->right;
         while (w->left) {
             w = w->left;
         }
@@ -95,12 +93,12 @@ BinarySearchTree* binarySearchTree_remove_node(
         u = bn;
     }
     //Splice
-    BinaryNode* s = (
+    binaryNode* s = (
         u->left
         ? u->left
         : u->right
     );
-    BinaryNode* p = 0;
+    binaryNode* p = 0;
     if (u == bst->root) {
         bst->root = s;
     } else {
@@ -121,8 +119,8 @@ BinarySearchTree* binarySearchTree_remove_node(
     return bst;
 }
 
-bool binarySearchTree_remove(BinarySearchTree bst[static 1], T v) {
-    BinaryNode* bn = binaryNode_find_eq(bst->root, v);
+bool binarySearchTree_remove(binarySearchTree bst[static 1], T v) {
+    binaryNode* bn = binaryNode_find_eq(bst->root, v);
     if (!bn) {
         return false;
     }
@@ -130,9 +128,9 @@ bool binarySearchTree_remove(BinarySearchTree bst[static 1], T v) {
     return true;
 }
 
-BinarySearchTree* binarySearchTree_clean(BinarySearchTree bst[static 1]) {
+binarySearchTree* binarySearchTree_clean(binarySearchTree bst[static 1]) {
     binaryNodep_free(bst->root);
     free(bst->root);
-    *bst = (BinarySearchTree){0};
+    *bst = (binarySearchTree){0};
     return bst;
 }

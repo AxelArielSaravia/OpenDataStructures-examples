@@ -6,18 +6,92 @@
 
 # include "./search-tree.c"
 # include "./treap.c"
+# include "./red-black.c"
 
 void binarySearchTreeTest(void);
 void treapTest(void);
+void redBlackTreeTest(void);
 
 int main() {
     //binarySearchTreeTest();
-    treapTest();
+    //treapTest();
+    redBlackTreeTest();
     return 0;
 }
 
+void redBlackTreeTest(void) {
+    redBlackTree rbt = {0};
+    if (!redBlackTree_add(&rbt, 23)) return;
+    assert(rbt.root);
+    assert(rbt.elements == 1);
+    assert(rbt.root->value == 23);
+    assert(rbt.root->color == BLACK);
+    assert(!rbt.root->left);
+    assert(!rbt.root->right);
+
+    //add existing element return false
+    assert(!redBlackTree_add(&rbt, 23));
+
+    if (!redBlackTree_add(&rbt, 2)) return;
+    assert(rbt.elements == 2);
+    assert(rbt.root->value == 23);
+    assert(rbt.root->left->value == 2);
+    assert(rbt.root->left->color == RED);
+
+    if (!redBlackTree_add(&rbt, 9)) return;
+    assert(rbt.elements == 3);
+    assert(rbt.root->value == 9);
+    assert(rbt.root->color == BLACK);
+    assert(rbt.root->left->value == 2);
+    assert(rbt.root->left->color == RED);
+    assert(rbt.root->right->value == 23);
+    assert(rbt.root->right->color == RED);
+
+    if (!redBlackTree_add(&rbt, 34)) return;
+    assert(rbt.elements == 4);
+    assert(rbt.root->value == 9);
+    assert(rbt.root->color == BLACK);
+    assert(rbt.root->left->value == 2);
+    assert(rbt.root->left->color == BLACK);
+    assert(rbt.root->right->value == 34);
+    assert(rbt.root->right->color == BLACK);
+    assert(rbt.root->right->left->value == 23);
+    assert(rbt.root->right->left->color == RED);
+
+    if (!redBlackTree_add(&rbt, 1)) return;
+    assert(rbt.elements == 5);
+    assert(rbt.root->value == 9);
+    assert(rbt.root->color == BLACK);
+    assert(rbt.root->left->value == 2);
+    assert(rbt.root->left->color == BLACK);
+    assert(rbt.root->left->left->value == 1);
+    assert(rbt.root->left->left->color == RED);
+    assert(rbt.root->right->value == 34);
+    assert(rbt.root->right->color == BLACK);
+    assert(rbt.root->right->left->value == 23);
+    assert(rbt.root->right->left->color == RED);
+
+    assert(redBlackTree_remove(&rbt, 34));
+    assert(rbt.elements == 4);
+    assert(rbt.root->value == 9);
+    assert(rbt.root->color == BLACK);
+    assert(rbt.root->left->value == 2);
+    assert(rbt.root->left->color == BLACK);
+    assert(rbt.root->left->left->value == 1);
+    assert(rbt.root->left->left->color == RED);
+    assert(rbt.root->right->value == 23);
+    assert(rbt.root->right->color == BLACK);
+
+    assert(!redBlackNode_find_eq(rbt.root, 34));
+
+    //remove a node does not exist return false
+    assert(!redBlackTree_remove(&rbt, 55));
+
+    redBlackTree_clean(&rbt);
+}
+
 void treapTest(void) {
-    Treap treap = {0};
+    treap treap = {0};
 
     if (!treap_add(&treap, 23)) return;
     assert(treap.root);
@@ -53,7 +127,7 @@ void treapTest(void) {
 };
 
 void binarySearchTreeTest(void) {
-    BinarySearchTree tree = {0};
+    binarySearchTree tree = {0};
     if (!binarySearchTree_add(&tree, 7)) return;
     assert(tree.root);
     assert(tree.elements == 1);
@@ -111,13 +185,13 @@ void binarySearchTreeTest(void) {
     {
     //find return the node that have the smalles value that is
     //grater than or equal to the argument
-        BinaryNode* n = binaryNode_find(tree.root, 10);
+        binaryNode* n = binaryNode_find(tree.root, 10);
         assert(n);
         assert(n == binaryNode_find(tree.root, 11));
     }
     {
     // remove a node with no children
-        BinaryNode* node6 = binaryNode_find_eq(tree.root, 6);
+        binaryNode* node6 = binaryNode_find_eq(tree.root, 6);
         if (node6) {
             binarySearchTree_remove_node(&tree, node6);
             assert(tree.elements == 11);

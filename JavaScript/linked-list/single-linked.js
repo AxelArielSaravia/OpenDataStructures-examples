@@ -27,8 +27,8 @@ const SLList = Object.freeze({
         });
     },
     /**
-    push <T> :: (LinkedList<T>, T) -> LinkedList<T> */
-    push(list, x) {
+    addHead <T> :: (LinkedList<T>, T) -> LinkedList<T> */
+    addHead(list, x) {
         /* node :: Node<T> */
         const node = {
             next: list.head,
@@ -42,8 +42,8 @@ const SLList = Object.freeze({
         return list;
     },
     /**
-    pop <T> :: (LinkedList<T>) -> maybe<T> */
-    pop(list) {
+    removeHead <T> :: (LinkedList<T>) -> maybe<T> */
+    removeHead(list) {
         if (list.length === 0) {
             return;
         }
@@ -56,8 +56,8 @@ const SLList = Object.freeze({
         return value;
     },
     /**
-    add <T> :: (LinkedList<T>, T) -> LinkedList<T> */
-    add(list, x) {
+    addTail <T> :: (LinkedList<T>, T) -> LinkedList<T> */
+    addTail(list, x) {
         const node = {
             next: undefined,
             value: x
@@ -72,13 +72,8 @@ const SLList = Object.freeze({
         return list;
     },
     /**
-    remove <T> :: (LinkedList<T>) -> T */
-    remove(list) {
-        return SLList.pop(list);
-    },
-    /**
-    removeFromTail <T> :: (LinkedList<T>) -> T*/
-    removeFromTail(list) {
+    removeTail <T> :: (LinkedList<T>) -> T*/
+    removeTail(list) {
         if (list.length === 0) {
             return;
         }

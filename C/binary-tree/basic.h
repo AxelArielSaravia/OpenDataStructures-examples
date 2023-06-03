@@ -8,40 +8,40 @@
 
 typedef signed T;
 
-typedef struct BinaryNode BinaryNode;
-struct BinaryNode {
-    BinaryNode* left;
-    BinaryNode* parent;
-    BinaryNode* right;
+typedef struct binaryNode binaryNode;
+struct binaryNode {
+    binaryNode* left;
+    binaryNode* parent;
+    binaryNode* right;
     T value;
 };
 
 /*
  Return the leght of the path from a node to the root
 */
-unsigned binaryTree_depth(BinaryNode bn[static 1]);
+unsigned binaryTree_depth(binaryNode bn[static 1]);
 
 
-unsigned binaryTree_recursive_size(BinaryNode*);
+unsigned binaryTree_recursive_size(binaryNode*);
 
 /*
  Return the longest path from a node to one of its descendants
 */
-unsigned binaryTree_recursive_height(BinaryNode*);
+unsigned binaryTree_recursive_height(binaryNode*);
 
-unsigned binaryTree_size(BinaryNode*);
+unsigned binaryTree_size(binaryNode*);
 
-unsigned binaryTree_height(BinaryNode*);
+unsigned binaryTree_height(binaryNode*);
 
 
-BinaryNode binaryNode_create(T, BinaryNode* const);
+binaryNode binaryNode_create(T, binaryNode* const);
 
 /*
- Return 0 if allocation fails, otherwise a BinaryNode ref
+ Return 0 if allocation fails, otherwise a binaryNode ref
 */
-BinaryNode* binaryNodep_create(T, BinaryNode* const);
+binaryNode* binaryNodep_create(T, binaryNode* const);
 
 
-void binaryNodep_free(BinaryNode*);
+void binaryNodep_free(binaryNode*);
 
 #endif

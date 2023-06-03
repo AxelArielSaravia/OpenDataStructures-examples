@@ -84,25 +84,25 @@ void doubleLinkedListTest(void) {
 void singleLinkedListTest(void) {
     sllist list = {0};
 
-    sllist_push(&list, 10);
+    sllist_add_head(&list, 10);
     assert(list.length == 1);
     assert(list.head->value == 10);
     assert(list.tail->value == 10);
 
-    sllist_push(&list, 20);
+    sllist_add_head(&list, 20);
     assert(list.length == 2);
     assert(list.head->value == 20);
     assert(list.tail->value == 10);
     assert(list.head->next->value == 10);
 
-    sllist_push(&list, 30);
+    sllist_add_head(&list, 30);
     assert(list.length == 3);
     assert(list.head->value == 30);
     assert(list.tail->value == 10);
     assert(list.head->next->value == 20);
     assert(list.head->next->next->value == 10);
 
-    sllist_add(&list, 100);
+    sllist_add_tail(&list, 100);
     assert(list.length == 4);
     assert(list.tail->value == 100);
     assert(list.head->value == 30);
@@ -110,7 +110,7 @@ void singleLinkedListTest(void) {
     assert(list.head->next->next->value == 10);
     assert(list.head->next->next->next->value == 100);
 
-    signed n = sllist_pop(&list);
+    signed n = sllist_remove_head(&list);
     assert(n == 30);
     assert(list.length == 3);
     assert(list.head->value == 20);
@@ -118,9 +118,9 @@ void singleLinkedListTest(void) {
     assert(list.head->next->value == 10);
     assert(list.head->next->next->value == 100);
 
-    sllist_push(&list, 30);
+    sllist_add_head(&list, 30);
 
-    assert(n == sllist_remove(&list));
+    assert(n == sllist_remove_head(&list));
     assert(list.length == 3);
     assert(list.head->value == 20);
     assert(list.tail->value == 100);
@@ -128,7 +128,7 @@ void singleLinkedListTest(void) {
     assert(list.head->next->next->value == 100);
 
   
-    n = sllist_removeFromTail(&list);
+    n = sllist_remove_tail(&list);
     assert(n == 100);
     assert(list.length == 2);
     assert(list.head->value == 20);

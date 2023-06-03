@@ -12,13 +12,87 @@ import BinarySearchTree from "./searchTree.js";
 import Treap from "./treap.js";
 import ScapegoatTree from "./scapegoat.js";
 
+import RedBlackTree from "./red-black.js";
+
 
 // Main Execution
 {
     //BasicTest();
     //BinarySearchTreeTest();
     //TreapTest();
-    ScapegoatTreeTest();
+    //ScapegoatTreeTest();
+    RedBlackTreeTest();
+}
+
+function RedBlackTreeTest() {
+    const BLACK = 1;
+    const RED = 0;
+    const rbt = RedBlackTree.create();
+
+    assert(RedBlackTree.add(rbt, 23));
+    assert(rbt.root !== undefined);
+    assert(rbt.elements === 1);
+    assert(rbt.root.value === 23);
+    assert(rbt.root.color === BLACK);
+    assert(rbt.root.left === undefined);
+    assert(rbt.root.right === undefined);
+
+    //add existing element return false
+    assert(!RedBlackTree.add(rbt, 23));
+
+    assert(RedBlackTree.add(rbt, 2));
+    assert(rbt.elements === 2);
+    assert(rbt.root.value === 23);
+    assert(rbt.root.left.value === 2);
+
+    assert(RedBlackTree.add(rbt, 9));
+    assert(rbt.elements === 3);
+    assert(rbt.root.value === 9);
+    assert(rbt.root.color === BLACK);
+    assert(rbt.root.left.value === 2);
+    assert(rbt.root.left.color === RED);
+    assert(rbt.root.right.value === 23);
+    assert(rbt.root.right.color === RED);
+
+    assert(RedBlackTree.add(rbt, 34));
+    assert(rbt.elements === 4);
+    assert(rbt.root.value === 9);
+    assert(rbt.root.color === BLACK);
+    assert(rbt.root.left.value === 2);
+    assert(rbt.root.left.color === BLACK);
+    assert(rbt.root.right.value === 34);
+    assert(rbt.root.right.color === BLACK);
+    assert(rbt.root.right.left.value === 23);
+    assert(rbt.root.right.left.color === RED);
+
+    assert(RedBlackTree.add(rbt, 1));
+    assert(rbt.elements === 5);
+    assert(rbt.root.value === 9);
+    assert(rbt.root.color === BLACK);
+    assert(rbt.root.left.value === 2);
+    assert(rbt.root.left.color === BLACK);
+    assert(rbt.root.left.left.value === 1);
+    assert(rbt.root.left.left.color === RED);
+    assert(rbt.root.right.value === 34);
+    assert(rbt.root.right.color === BLACK);
+    assert(rbt.root.right.left.value === 23);
+    assert(rbt.root.right.left.color === RED);
+
+    assert(RedBlackTree.remove(rbt, 34));
+    assert(rbt.elements === 4);
+    assert(rbt.root.value === 9);
+    assert(rbt.root.color === BLACK);
+    assert(rbt.root.left.value === 2);
+    assert(rbt.root.left.color === BLACK);
+    assert(rbt.root.left.left.value === 1);
+    assert(rbt.root.left.left.color === RED);
+    assert(rbt.root.right.value === 23);
+    assert(rbt.root.right.color === BLACK);
+
+    assert(RedBlackTree.findEq(rbt.root, 34) === undefined);
+
+    //remove a node does not exist return false
+    assert(!RedBlackTree.remove(rbt, 55));
 }
 
 function ScapegoatTreeTest() {

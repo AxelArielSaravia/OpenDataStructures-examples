@@ -6,8 +6,6 @@
     This Treap data structure uses the BinarySearchTree
 */
 
-import BinarySearchTree from "./searchTree.js";
-
 /**
 TreapNode T :: {
     left: maybe BinaryNode T,
@@ -182,7 +180,7 @@ const Treap = {
             }
             //Splice
             {
-                let s /*::maybe TreapNode T */ = (
+                const s /*::maybe TreapNode T */ = (
                     n.left !== undefined
                     ? n.left
                     : n.right

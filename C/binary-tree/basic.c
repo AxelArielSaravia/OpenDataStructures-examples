@@ -5,7 +5,7 @@
 #include "./basic.h"
 
 
-unsigned binaryTree_depth(BinaryNode node[static 1]) {
+unsigned binaryTree_depth(binaryNode node[static 1]) {
     unsigned d = 0;
     while (node) {
         node = node->parent;
@@ -14,7 +14,7 @@ unsigned binaryTree_depth(BinaryNode node[static 1]) {
     return d;
 }
 
-unsigned binaryTree_recursive_size(BinaryNode* root) {
+unsigned binaryTree_recursive_size(binaryNode* root) {
     return (
         !root
         ? 0
@@ -26,7 +26,7 @@ unsigned binaryTree_recursive_size(BinaryNode* root) {
     );
 }
 
-unsigned binaryTree_recursive_height(BinaryNode* root) {
+unsigned binaryTree_recursive_height(binaryNode* root) {
     if (!root) {
         return 0;
     }
@@ -40,11 +40,11 @@ unsigned binaryTree_recursive_height(BinaryNode* root) {
 }
 
 // Based in the traverse function
-unsigned binaryTree_size(BinaryNode* root) {
+unsigned binaryTree_size(binaryNode* root) {
     unsigned n = 0;
-    BinaryNode* u = root;
-    BinaryNode* prv = 0;
-    BinaryNode* nxt = 0;
+    binaryNode* u = root;
+    binaryNode* prv = 0;
+    binaryNode* nxt = 0;
     while (u) {
         if (prv == u->parent) {
     // Visit a node for the first time
@@ -72,12 +72,12 @@ unsigned binaryTree_size(BinaryNode* root) {
     return n;
 }
 
-unsigned binaryTree_height(BinaryNode* root) {
+unsigned binaryTree_height(binaryNode* root) {
     unsigned n = 0;
     unsigned m = n;
-    BinaryNode* u = root;
-    BinaryNode* prv = 0;
-    BinaryNode* nxt = 0;
+    binaryNode* u = root;
+    binaryNode* prv = 0;
+    binaryNode* nxt = 0;
     while (u) {
         if (prv == u->parent) {
     // Visit a node for the first time
@@ -115,7 +115,7 @@ unsigned binaryTree_height(BinaryNode* root) {
  This function shows diferent algoritms to traverse a binary tree
 */
 
-void recursive_travel(BinaryNode* root) {
+void recursive_travel(binaryNode* root) {
     if (!root) {
         return;
     }
@@ -124,10 +124,10 @@ void recursive_travel(BinaryNode* root) {
 }
 
 //This traverse sometimes is called first-depth traverse
-void traverse(BinaryNode* root) {
-    BinaryNode* u = root;
-    BinaryNode* prv = 0;
-    BinaryNode* nxt = 0;
+void traverse(binaryNode* root) {
+    binaryNode* u = root;
+    binaryNode* prv = 0;
+    binaryNode* nxt = 0;
     while (u) {
         if (prv == u->parent) {
     // Visit a node for the first time
@@ -154,8 +154,8 @@ void traverse(BinaryNode* root) {
 }
 
 
-BinaryNode binaryNode_create(T v, BinaryNode* const parent) {
-    return (BinaryNode){
+binaryNode binaryNode_create(T v, binaryNode* const parent) {
+    return (binaryNode){
         .parent = parent,
         .left = 0,
         .right = 0,
@@ -163,10 +163,10 @@ BinaryNode binaryNode_create(T v, BinaryNode* const parent) {
     };
 }
 
-BinaryNode* binaryNodep_create(T v, BinaryNode* const parent) {
-    BinaryNode* res = malloc(sizeof(BinaryNode));
+binaryNode* binaryNodep_create(T v, binaryNode* const parent) {
+    binaryNode* res = malloc(sizeof(binaryNode));
     if (res) {
-        *res = (BinaryNode){
+        *res = (binaryNode){
             .left = 0,
             .parent = parent,
             .right = 0,
@@ -176,10 +176,10 @@ BinaryNode* binaryNodep_create(T v, BinaryNode* const parent) {
     return res;
 }
 
-void binaryNodep_free(BinaryNode* root) {
-    BinaryNode* u = root;
-    BinaryNode* prv = 0;
-    BinaryNode* nxt = 0;
+void binaryNodep_free(binaryNode* root) {
+    binaryNode* u = root;
+    binaryNode* prv = 0;
+    binaryNode* nxt = 0;
     while (u) {
         if (prv == u->parent) {
     // Visit a node for the first time
