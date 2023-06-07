@@ -156,22 +156,22 @@ bool redBlackTree_add(redBlackTree rbt[static 1], T const v) {
     redBlackNode* u = 0;
     { // Add Node
         redBlackNode* p = 0;
-        { // find the node or a proper parent
-            redBlackNode* w = rbt->root;
-            redBlackNode* prev = 0;
-            while (w) {
-                prev = w;
-                if (v < w->value) {
-                    w = w->left;
-                } else if (v > w->value) {
-                    w = w->right;
-                } else {
+        // find the node or a proper parent
+        redBlackNode* w = rbt->root;
+        redBlackNode* prev = 0;
+        while (w) {
+            prev = w;
+            if (v < w->value) {
+                w = w->left;
+            } else if (v > w->value) {
+                w = w->right;
+            } else {
         // We find the node, then is no need to insert it
-                    return false;
-                }
+                return false;
             }
-            p = prev;
         }
+        p = prev;
+        
         u = redBlackNode_create(v, p);
         if (!u) {
             return false;
@@ -213,6 +213,7 @@ bool redBlackTree_add(redBlackTree rbt[static 1], T const v) {
         redBlackTree_push_black(g);
         u = g;
     }
+    return true;
 }
 
 bool redBlackTree_remove(redBlackTree rbt[static 1], T const v) {

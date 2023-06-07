@@ -61,7 +61,7 @@ const RedBlackTree = /*:freeze:*/{
     findEq(u, v) {
         while (u !== undefined) {
             if (v < u.value) {
-                n = u.left;
+                u = u.left;
             } else if (v > u.value) {
                 u = u.right;
             } else {
@@ -219,6 +219,7 @@ const RedBlackTree = /*:freeze:*/{
             RedBlackTree.pushBlack(g);
             u = g;
         }
+        return true;
     },
     /**
     remove :: (RedBlackTreeRoot T, T) -> boolean */

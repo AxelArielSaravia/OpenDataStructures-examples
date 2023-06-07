@@ -77,8 +77,7 @@ const BinarySearchTree = {
     addNode T :: (BinarySearchTreeRoot T, BinaryNode T) -> boolean */
     addNode(bst, n) {
         let p /*::maybe BinaryNode T*/;
-        // find the node or a proper parent
-        {
+        {  // find the node or a proper parent
             let w /*:: maybe BinaryNode T*/= bst.root;
             let prev /*::maybe BinaryNode T*/;
             while (w !== undefined) {

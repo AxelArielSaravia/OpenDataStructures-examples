@@ -45,8 +45,7 @@ const DLList = Object.freeze({
         let node;
         if (i < 0) {
             i = (i * (-1)) - 1;
-        }
-        if (list.length && list.length <= i) {
+        }else if (list.length && list.length <= i) {
             i = (i - 1) % list.length;
         }
         if (i < list.length / 2) {
