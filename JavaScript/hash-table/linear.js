@@ -44,7 +44,7 @@ const LinearHashTable = Object.freeze({
     hash :: (LinearHashTable, number[int32]) -> number[uint] */
     hash(htable, value) {
         return Math.floor(
-            ((htable.randOdd * value) % LinearHashTable.MAX_N)
+            (8(htable.randOdd * value) % LinearHashTable.MAX_N)
             / (2**(LinearHashTable.WORD - htable.tword))
         );
     },

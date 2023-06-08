@@ -65,11 +65,11 @@ const SkipListList = Object.freeze({
     },
     /**
     set T :: (SkipListList T, number [uint], T) -> maybe T */
-    set(list, i, value) {
+    set(list, i, v) {
         const node = SkipListList.getNode(list, i);
         const y = node.value;
         if (node !== list.sentinel) {
-            node.value = value;
+            node.value = v;
         }
         return y;
     },

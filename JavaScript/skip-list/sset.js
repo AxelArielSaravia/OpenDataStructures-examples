@@ -50,12 +50,12 @@ const SkipListSSet = Object.freeze({
     },
     /**
     getNode T :: (SkipListSSet T, T) -> SkipListNode T */
-    getNode(skiplist, value) {
+    getNode(skiplist, v) {
         let node = skiplist.sentinel;
         let r = skiplist.height;
         while (r >= 0) {
             while (node.next[r] !== undefined
-                && node.next[r].value < value
+                && node.next[r].value < v
             ) {
                 node = node.next[r];
             }
@@ -65,8 +65,8 @@ const SkipListSSet = Object.freeze({
     },
     /**
     find T :: (SkipListSSet T, T) -> maybe T */
-    find(skiplist, value) {
-        const node = SkipListSSet.getNode(skiplist, value);
+    find(skiplist, v) {
+        const node = SkipListSSet.getNode(skiplist, v);
         return (
             node !== undefined
             ? node.value
@@ -88,17 +88,17 @@ const SkipListSSet = Object.freeze({
     },
     /**
     add T :: (SkipListSSet T, T) -> boolean */
-    add(skiplist, value) {
+    add(skiplist, v) {
         let node = skiplist.sentinel;
         let r = skiplist.height;
         while (r >= 0) {
             while (node.next[r] !== undefined
-                && node.next[r].value < value
+                && node.next[r].value < v
             ) {
                 node = node.next[r];
             }
             if (node.next[r] !== undefined
-                && node.next[r].value === value
+                && node.next[r].value === v
             ) {
                 return false;
             }
@@ -109,7 +109,7 @@ const SkipListSSet = Object.freeze({
         const newNode = {
             height: newNodeHeight,
             next: Array(newNodeHeight + 1),
-            value,
+            value: v,
         };
     
         while (skiplist.height < newNodeHeight) {
@@ -125,18 +125,18 @@ const SkipListSSet = Object.freeze({
     },
     /**
     remove T :: (SkipListSSet T, T) -> boolean */
-    remove(skiplist, value) {
+    remove(skiplist, v) {
         let removed = false;
         let node = skiplist.sentinel;
         let r = skiplist.height;
         while (r >= 0) {
             while (node.next[r] !== undefined
-                && node.next[r].value < value
+                && node.next[r].value < v
             ) {
                 node = node.next[r];
             }
             if (node.next[r] !== undefined 
-                && node.next[r].value == value
+                && node.next[r].value == v
             ) {
                 removed = true;
                 node.next[r] = node.next[r].next[r];

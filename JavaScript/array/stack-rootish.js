@@ -5,7 +5,7 @@
 import ArrayStack from "./stack.js";
 /**
 RootishStack T :: {
-    blocks: Stack T,
+    blocks: Stack Array T,
     length: number [uint]
 }
 */
@@ -42,7 +42,7 @@ const RootishArrayStack = Object.freeze({
         return ArrayStack.get(stack, b)?.[j];
     },
     /**
-    shrink T :: (RootishStack T, number [uint]) -> maybe T */
+    shrink T :: (RootishStack T, number [uint]) -> maybe RootishStack T */
     shrink(stack) {
         let r = stack.blocks.length;
         while (
@@ -75,7 +75,7 @@ const RootishArrayStack = Object.freeze({
     add(stack, i, x) {
         const r = stack.blocks.length;
         if (r * (r + 1) / 2 < stack.length + 1) {
-            grow(stack);
+            RootishArrayStack.grow(stack);
         }
         stack.length += 1;
         for (let j = stack.length - 1; j > i; j -= 1) {
@@ -85,12 +85,14 @@ const RootishArrayStack = Object.freeze({
                 RootishArrayStack.get(stack, j - 1)
             );
         }
+        RootishArrayStack.set(stack, i, x);
+        return stack;
     },
     /**
     remove T :: (RootishStack T, number [uint]) -> T */
     remove(stack, i) {
         const x = RootishArrayStack.get(stack, i);
-        for (let j = i; j < stack.length - 1; i += 1) {
+        for (let j = i; j < stack.length - 1; j += 1) {
             RootishArrayStack.set(
                 stack,
                 j,

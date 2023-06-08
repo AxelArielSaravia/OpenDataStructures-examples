@@ -59,19 +59,19 @@ const BoundedArrayDeque = Object.freeze({
             for (let k = 0; k < i - 1; k += 1) {
                 const i0 = (deque.head + k) % deque.capacity;
                 const i1 = (deque.head + k + 1) % deque.capacity;
-                deque.content[i0] = deque[i1];
+                deque.content[i0] = deque.content[i1];
             }
         } else {
-            for (let k = queue.length; k > i + 1; k -= 1) {
+            for (let k = deque.length; k > i + 1; k -= 1) {
                 const i0 = (deque.head + k) % deque.capacity;
                 const i1 = (deque.head + k - 1) % deque.capacity;
-                deque.content[i0] = deque[i1];
+                deque.content[i0] = deque.content[i1];
             }
         }
         const idx = (deque.head + i) % deque.capacity;
         deque.content[idx] = x;
         deque.length += 1;
-        return queue;
+        return deque;
     },
     /**
     remove T :: (BoundedDeque T, number [uint]) -> maybe T */
@@ -87,17 +87,17 @@ const BoundedArrayDeque = Object.freeze({
 
         const j = (deque.head + i) % deque.capacity;
         const x = deque.content[j];
-        if (i < queue.length / 2) {
+        if (i < deque.length / 2) {
             for (let k = i; k > 0; k -= 1) {
                 const i0 = (deque.head + k) % deque.capacity;
                 const i1 = (deque.head + k - 1) % deque.capacity;
-                deque.content[i0] = deque[i1];
+                deque.content[i0] = deque.content[i1];
             }
         } else {
             for (let k = i; k < deque.length; k += 1) {
                 const i0 = (deque.head + k) % deque.capacity;
                 const i1 = (deque.head + k + 1) % deque.capacity;
-                deque.content[i0] = deque[i1];
+                deque.content[i0] = deque.content[i1];
             }
         }
         deque.length -= 1;

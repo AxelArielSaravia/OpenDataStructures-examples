@@ -242,7 +242,7 @@ function breadthFirstTraversal(root) {
             queue.push(u.left);
         }
         if (u.right !== undefined) {
-            queue.add(u.rigth);
+            queue.push(u.rigth);
         }
     }
 }

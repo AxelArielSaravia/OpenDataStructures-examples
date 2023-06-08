@@ -99,7 +99,7 @@ const ScapegoatTree = {
             return undefined;
         }
         const m = Math.floor(ns / 2);
-        const n = a[i+m];
+        const n = a[i + m];
         n.left = ScapegoatTree.buildBalance_recursive(a, i, m);
         if (n.left !== undefined) {
             n.left.parent = n;
@@ -152,23 +152,21 @@ const ScapegoatTree = {
         {
             let p /*::maybe BinaryNode T*/;
             // find the node or a proper parent
-            {
-                let w /*:: maybe BinaryNode T*/= st.root;
-                let prev /*::maybe BinaryNode T*/;
-                while (w !== undefined) {
-                    prev = w;
-                    depth += 1;
-                    if (v < w.value) {
-                        w = w.left;
-                    } else if (v > w.value) {
-                        w = w.right;
-                    } else {
+            let prev /*::maybe BinaryNode T*/;
+            for (let w = st.root; w !== undefined;) {
+                prev = w;
+                depth += 1;
+                if (v < w.value) {
+                    w = w.left;
+                } else if (v > w.value) {
+                    w = w.right;
+                } else {
             // We find the node, then is no need to insert it
-                        return false;
-                    }
+                    return false;
                 }
-                p = prev;
             }
+            p = prev;
+            
             // create a new node, and define p as his parent
             n = createBinaryNode(v, p);
             if (p === undefined) {
@@ -197,8 +195,8 @@ const ScapegoatTree = {
     },
     /**
     remove T :: (ScapegoatTreeRoot T, T) -> boolean */
-    remove(ts, v) {
-        const n = ScapegoatTree.findEq(ts.root, v);
+    remove(st, v) {
+        const n = ScapegoatTree.findEq(st.root, v);
         if (n === undefined) {
             return false;
         }
@@ -235,15 +233,15 @@ const ScapegoatTree = {
             }
             st.elements -= 1;
         }
-        if (2 * ts.elements < ts.counter) {
-            ScapegoatTree.rebuild(st, ts.root);
-            ts.counter = ts.elements;
+        if (2 * st.elements < st.counter) {
+            ScapegoatTree.rebuild(st, st.root);
+            st.counter = st.elements;
         }
         return true;
     }
 };
 
-//procedural
+//Imperative
 /**
 packIntoArray T :: (BinaryNode T) -> Array BinaryNode T */
 function packIntoArray(n) {
