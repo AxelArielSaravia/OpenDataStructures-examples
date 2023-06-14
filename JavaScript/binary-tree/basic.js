@@ -208,7 +208,8 @@ function traverse2(root) {
         u = stack[stack.length - 1];
     // if u.right === left means that we visit all the nested nodes
         if (u.right !== undefined && u.right === left) {
-    // We asume that the node u is the left of his parent, otherwise we pass for all the nested nodes
+    // We asume that the node u is the left of his parent,
+    // otherwise we pass for all the nested nodes
             left = u;
             stack.pop();
        } else {
@@ -221,7 +222,7 @@ function traverse2(root) {
             } else {
                 if (u !== left && u !== right) {
     // We asume that the node u is the left of his parent
-    // otherwise if is the right node, means that we need to go up again, cause 
+    // otherwise if is the right node, means that we need to go up again, cause
     // we pass for all the nested nodes
                     left = u;
                 }

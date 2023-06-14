@@ -4,7 +4,6 @@
 
 #include "./basic.h"
 
-
 unsigned binaryTree_depth(binaryNode node[static 1]) {
     unsigned d = 0;
     while (node) {

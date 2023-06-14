@@ -39,8 +39,8 @@ const LinearHashTable = Object.freeze({
             randOdd: 4102541685,//random odd number for the hash function (test 4102541685)
         });
     },
+    //Multuplicative hashing method
     /**
-    -- Multuplicative hashing method
     hash :: (LinearHashTable, number[int32]) -> number[uint] */
     hash(htable, value) {
         return Math.floor(

@@ -47,7 +47,7 @@ const ScapegoatTree = {
             counter: 0,
         };
     },
-      /**
+    /**
     size T :: (BinaryNode T) -> number */
     size(node) {
         // Based in the traverse function
@@ -62,7 +62,8 @@ const ScapegoatTree = {
                 nxt = (
                     u.left !== undefined
                     ? u.left
-                    : ( u.right !== undefined
+                    : (
+                        u.right !== undefined
                         ? u.right
                         : u.parent
                     )
@@ -82,7 +83,11 @@ const ScapegoatTree = {
         return n;
     },
     /**
-    packIntoArray_recursive T :: (BinaryNode T, Array BinaryNode T, number [uint]) -> number [uint] */
+    packIntoArray_recursive T :: (
+        BinaryNode T,
+        Array BinaryNode T,
+        number [uint]
+    ) -> number [uint] */
     packIntoArray_recursive(n, a, i) {
         if (n === undefined) {
             return i;
@@ -93,7 +98,11 @@ const ScapegoatTree = {
         return ScapegoatTree.packIntoArray_recursive(n.right, a, i);
     },
     /**
-    buildBalance_recursive T :: (Array BinaryNode T, number [uint], number [ns]) -> maybe BinaryNode T */
+    buildBalance_recursive T :: (
+        Array BinaryNode T,
+        number [uint],
+        number [ns]
+    ) -> maybe BinaryNode T */
     buildBalance_recursive(a, i, ns) {
         if (ns === 0) {
             return undefined;
@@ -104,7 +113,9 @@ const ScapegoatTree = {
         if (n.left !== undefined) {
             n.left.parent = n;
         }
-        n.right = ScapegoatTree.buildBalance_recursive(a, i + m + 1, ns - m - 1);
+        n.right = (
+            ScapegoatTree.buildBalance_recursive(a, i + m + 1, ns - m - 1)
+        );
         if (n.right !== undefined) {
             n.right.parent = n;
         }
@@ -166,7 +177,7 @@ const ScapegoatTree = {
                 }
             }
             p = prev;
-            
+
             // create a new node, and define p as his parent
             n = createBinaryNode(v, p);
             if (p === undefined) {
@@ -186,7 +197,10 @@ const ScapegoatTree = {
         if (log3div2(st.counter) < depth) {
             //depth exeeded, find scapegoat
             let w = n.parent;
-            while (3 * ScapegoatTree.size(w) <= 2 * ScapegoatTree.size(w.parent)) {
+            while (
+                3 * ScapegoatTree.size(w)
+                <= 2 * ScapegoatTree.size(w.parent)
+            ) {
                 w = w.parent;
             }
             ScapegoatTree.rebuild(st, w.parent);
@@ -196,7 +210,7 @@ const ScapegoatTree = {
     /**
     remove T :: (ScapegoatTreeRoot T, T) -> boolean */
     remove(st, v) {
-        const n = ScapegoatTree.findEq(st.root, v);
+        let n = ScapegoatTree.findEq(st.root, v);
         if (n === undefined) {
             return false;
         }
