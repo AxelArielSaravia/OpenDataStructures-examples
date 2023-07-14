@@ -8,8 +8,8 @@
 # define STRUCT_BINARY_HEAP
 struct binaryHeap {
     T content[32];
-    size_t cap; 
-    size_t len; 
+    size_t cap;
+    size_t len;
 };
 #endif
 

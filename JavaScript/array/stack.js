@@ -77,7 +77,7 @@ const ArrayStack = Object.freeze({
         }
         const x = stack.content[i];
         for (
-            let j = i, 
+            let j = i,
                 last = stack.length - 1;
             j < last;
             j += 1

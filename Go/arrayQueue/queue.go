@@ -4,8 +4,8 @@
 package arrayQueue
 
 type Queue[T any] struct {
-    Head 	uint
-    Len 	uint
+    Head uint
+    Len uint
     content []T
 }
 
@@ -24,7 +24,7 @@ func (q *Queue[T]) Add(x T) *Queue[T] {
     index := (q.Head + q.Len) % uint(cap(q.content))
     q.content[index] = x
     q.Len += 1
-    return q 
+    return q
 }
 
 func (q *Queue[T]) Remove() T {
@@ -39,8 +39,8 @@ func (q *Queue[T]) Remove() T {
 }
 
 func (q *Queue[T]) Clear() {
-    q.Head = 0 
-    q.Len = 0 
+    q.Head = 0
+    q.Len = 0
     q.content = q.content[:1]
 }
 

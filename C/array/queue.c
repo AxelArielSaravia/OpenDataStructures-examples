@@ -105,7 +105,7 @@ queue queue_resize(queue q) {
                     new_content + old_head,
                     fst_length * sizeof(unsigned)
                 );
-            } 
+            }
         }
     // never can be newCapacity === oldCapacity
     } else {

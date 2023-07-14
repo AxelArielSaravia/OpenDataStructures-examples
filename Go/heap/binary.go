@@ -27,7 +27,7 @@ func bubbleUp[T inequable](bh *BinaryHeap[T], i int) {
 }
 
 func (bh *BinaryHeap[T]) Add(x T) bool {
-    if (Len(bh.content) == bh.len) {
+    if (len(bh.content) == bh.Len) {
         return false;
     }
     bh.content[bh.Len] = x

@@ -8,7 +8,7 @@
 # include <stdlib.h>
 
 # ifndef ARRAY_STACK_H
-#  include "stack.c"
+#   include "./stack.c"
 # endif
 
 typedef signed T;

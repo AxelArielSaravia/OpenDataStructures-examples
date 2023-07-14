@@ -183,18 +183,14 @@ void binaryNodep_free(binaryNode* root) {
         if (prv == u->parent) {
     // Visit a node for the first time
             nxt = (
-                u->left
-                ? u->left
-                : ( u->right
-                    ? u->right
-                    : u->parent
-                )
+                u->left ? u->left
+                : u->right ? u->right
+                : /*otherwise*/ u->parent
             );
         } else if (prv == u->left) {
             nxt = (
-                u->right
-                ? u->right
-                : u->parent
+                u->right ? u->right
+                : /*otherwise*/ u->parent
             );
             free(prv);
             u->left = 0;
@@ -209,3 +205,4 @@ void binaryNodep_free(binaryNode* root) {
         root->right = 0;
     }
 }
+
